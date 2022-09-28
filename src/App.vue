@@ -47,7 +47,7 @@ export default {
 
 <style>
 #loginOrSign-page {
-  font-family: "Dalek Pinpoint","AbhayaLibre",Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Dalek Pinpoint","AbhayaLibre-ExtraBold",Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -57,8 +57,9 @@ export default {
   font-family: "Dalek Pinpoint";
   src: local("DalekPinpointBold"),   url(./fonts/DalekPinpointBold.ttf) format("truetype");
 }
+
 @font-face {
-  font-family: "AbhayaLibre";
+  font-family: "AbhayaLibre-ExtraBold";
   src: local("AbhayaLibre-ExtraBold"), url(./fonts/AbhayaLibre-ExtraBold.ttf) format("truetype");
 }
 </style>
