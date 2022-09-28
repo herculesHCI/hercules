@@ -1,7 +1,6 @@
 <template>
   <div id="loginOrSign-page">
     <img alt="Hercules logo" src="./assets/Hercules.png">
-    <!--HelloWorld  msg="Hercules"/-->
     <h1 class="v-text">Hercules</h1>
     <div >
       <input type="text" placeholder="Username or email" v-model="message">
@@ -20,6 +19,18 @@
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
+// const vuetify = new Vuetify({
+//   theme: {
+//     themes: {
+//       light: {
+//         primary: '#3f51b5',
+//         secondary: '#b0bec5',
+//         accent: '#8c9eff',
+//         error: '#b71c1c',
+//       },
+//     },
+//   },
+// })
 
 export default {
   name: 'App',
@@ -37,4 +48,8 @@ export default {
   text-align: center;
   color: #000000;
 }
+@font-face {
+  font-family: "Dalek Pinpoint";
+  src: local("DalekPinpointBold"),   url(./fonts/DalekPinpointBold.ttf) format("truetype");}
+
 </style>
