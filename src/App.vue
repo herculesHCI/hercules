@@ -3,16 +3,13 @@
     <img alt="Hercules logo" src="./assets/Hercules.png">
     <h1 class="v-text">Hercules</h1>
     <div >
-      <input type="text" class="v-file-input__text--placeholder" placeholder="Username or email" v-model="message" >
+      <input type="text" class="v-file-input__text--placeholder" placeholder="Username or email" v-model="Username" >
     </div>
     <div>
-      <input type="text" placeholder="Password" v-model="message">
+      <input type="text" placeholder="Password" v-model="Password">
     </div>
     <div>
-      <v-btn color="black"
-             elevation="2"
-             outlined
-      >Log In</v-btn>
+      <v-btn>Log In</v-btn>
     </div>
   </div>
 </template>
@@ -31,7 +28,6 @@
 //     },
 //   },
 // })
-
 export default {
   name: 'App',
   components: {
@@ -39,7 +35,8 @@ export default {
   },
   data(){
     return {
-
+      Username:'',
+      Password:''
     }
   }
 }
@@ -57,9 +54,9 @@ export default {
   font-family: "Dalek Pinpoint";
   src: local("DalekPinpointBold"),   url(./fonts/DalekPinpointBold.ttf) format("truetype");
 }
-
 @font-face {
   font-family: "AbhayaLibre-ExtraBold";
   src: local("AbhayaLibre-ExtraBold"), url(./fonts/AbhayaLibre-ExtraBold.ttf) format("truetype");
 }
 </style>
+
