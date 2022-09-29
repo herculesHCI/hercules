@@ -1,10 +1,19 @@
 <template>
-  <v-app class="grey lighten-4">
-
-    <v-content>
-      <router-view></router-view>
-    </v-content>
-
+  <v-app class="">
+    <headerComp/>
   </v-app>
 </template>
 
+<script>
+import headerComp from "@/components/header-comp"
+
+export default{
+  components:{
+    headerComp
+  }
+}
+</script>
+
+<style>
+
+</style>
