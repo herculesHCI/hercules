@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card height="200px"
+    <v-card height="74px"
             color="#FFFFFF"
             flat
             tile>

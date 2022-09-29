@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <header-comp/>
-    <div id="home-landing">
+    <div id="home-landing" class="Home">
 
     </div>
   </v-content>
