@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-card height="200px"
+    <v-card height="74px"
             color="#FFFFFF"
             flat
             tile>
-      <v-toolbar extended extension-height="10px" >
+      <v-toolbar extended extension-height="10px" elevation="2" >
         <v-img max-width="2em" src="@/assets/HerculesNegro.png"/>
         <v-btn text id="header-comp-style" style="font-size: 30px">Hercules</v-btn>
         <v-btn
