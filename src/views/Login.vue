@@ -45,7 +45,7 @@
 
 
 export default {
-  name: 'App',
+  name: 'Login-view',
   components: {
     //HelloWorld
   },
