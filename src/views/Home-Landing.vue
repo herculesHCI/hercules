@@ -10,7 +10,13 @@
 <script>
 import HeaderComp from "@/components/header-comp";
 export default {
-  components: {HeaderComp}
+  components: {HeaderComp},
+  data() {
+    return {
+      username: '',
+      password: ''
+    }
+  }
 }
 
 </script>
