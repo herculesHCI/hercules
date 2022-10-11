@@ -52,7 +52,11 @@ export default {
   object-position: 50% 30%;
   padding: 0 0;
   margin: 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .workout-element-text{
   text-align: left;
   padding-top: 30px;
