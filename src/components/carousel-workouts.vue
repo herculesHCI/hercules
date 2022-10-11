@@ -1,27 +1,28 @@
 <template>
-  <v-container>
+  <v-container id="carousel-style">
     <v-carousel
         hide-delimiter-background
         height="400"
+        cycle
     >
       <v-carousel-item
           v-for="(item,i) in items"
           :key="i"
           reverse-transition="fade-transition"
-          transition="fade-transition">
-        <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
-        >
-          <v-img :src="item.src" max-width="20em"/>
-          <div class="display-3" id="carousel-style">
-            <v-icon>mdi-star</v-icon>
-            <v-text  >
+          transition="fade-transition"
+          :src="item.src" class="imageOutline">
+        <v-sheet color="#FFFFFF" height="10%">
+          <v-row
+              class="fill-height"
+              align="center"
+              justify="center"
+          >
+            <v-icon>mdi-star-outline</v-icon>
+            <p>
               {{item.rating}} {{item.workoutName}}
-            </v-text>
-          </div>
-        </v-row>
+            </p>
+          </v-row>
+        </v-sheet>
       </v-carousel-item>
     </v-carousel>
   </v-container>
@@ -42,6 +43,11 @@ export default {
           src:'https://i.imgur.com/su14xrQ.png',
           workoutName: "Diego's Workout",
           rating: 4.9
+        },
+        {
+          src:'https://i.imgur.com/gncEZZ8.jpeg',
+          workoutName: "Olympic WL",
+          rating: 4.7
         }
       ]
     }
@@ -59,6 +65,12 @@ export default {
 }
 @font-face {
   font-family: Inter2;
-  src: local(Inter-VariableFont),url(@/fonts/Inter-VariableFont.ttf) format("truetype");
+  src: local(Inter-VariableFont),url(@/fonts/static/Inter-Regular.ttf) format("truetype");
+}
+v-sheet{
+  margin-bottom: 40px;
+}
+.imageOutline {
+  border: 3px solid black;
 }
 </style>
