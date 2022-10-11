@@ -1,6 +1,5 @@
 <template>
   <div id="home-landing">
-    <header-comp/>
     <h1 class="font-weight-medium" style="font-family: Inter2">Trending Routines</h1>
     <div>
       <carousel-workouts/>
@@ -13,14 +12,12 @@
 </template>
 
 <script>
-import headerComp from "@/components/header-comp"
 import CarouselWorkouts from "@/components/carousel-workouts";
 import GridCategory from "@/components/grid-category";
 export default{
   components:{
     GridCategory,
     CarouselWorkouts,
-    headerComp
   }
 }
 </script>

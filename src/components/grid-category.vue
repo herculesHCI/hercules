@@ -1,6 +1,6 @@
 <template>
   <div id="grid-style">
-    <v-container class="black">
+    <v-container >
       <v-row align="center">
         <v-col v-for="(item) in items" :key="item.n">
           <v-card
@@ -121,6 +121,6 @@ export default {
   src: local(Inter-VariableFont),url(@/fonts/static/Inter-Regular.ttf) format("truetype");
 }
 .imageOutline {
-  border: 3px solid black;
+  border: 2px solid black;
 }
 </style>

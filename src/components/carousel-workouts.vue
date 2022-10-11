@@ -2,9 +2,8 @@
   <v-container id="carousel-style">
     <v-carousel
         hide-delimiter-background
-        height="420"
+        height="530"
         cycle
-        align="center"
         show-arrows-on-hover
     >
       <template v-slot:prev="{on,attrs}">
@@ -14,7 +13,7 @@
             icon
           v-bind="attrs"
           v-on="on">
-          <v-icon>arrow-left</v-icon>
+          <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
       </template>
       <template v-slot:next="{on,attrs}">
@@ -24,14 +23,14 @@
             icon
             v-bind="attrs"
             v-on="on">
-          <v-icon>arrow-right</v-icon>
+          <v-icon>mdi-arrow-right</v-icon>
         </v-btn>
       </template>
       <v-carousel-item v-for="card in items" :key="card"
       transition="fade-transition">
         <v-card :loading="loading"
                 class="mx-auto my-12 workoutCardOutline"
-                width="500"
+                width="600"
                 style="font-family:Inter2"
         >
           <template slot="progress">
@@ -43,9 +42,10 @@
 
           <v-img max-height="250" :src="card.src"/>
 
-          <v-card-title style="padding-left: 20px">{{ card.workoutName }} <v-spacer/>
+          <v-card-title style="padding-left: 20px">{{ card.workoutName }}
+            <v-spacer/>
             <v-icon>mdi-star-outline</v-icon>
-            <p class="sm1">{{ card.rating }} ({{ card.reviewAmount }})</p>
+            {{ card.rating }} ({{ card.reviewAmount }})
           </v-card-title>
 
           <v-card-text style="padding-left: 30px">
@@ -56,13 +56,12 @@
               </div>
             </v-row>
           </v-card-text>
-          <v-card-actions style="padding-left: 20px">
             <v-btn
-                color="#204dee"
+                class="blue darken-3  white--text"
+                style="margin: 20px"
             >
               See Workout
             </v-btn>
-          </v-card-actions>
         </v-card>
       </v-carousel-item>
     </v-carousel>
