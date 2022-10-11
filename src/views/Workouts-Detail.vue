@@ -8,7 +8,7 @@
       </v-icon>
 
       <div class="Individual-Workout-Details" >
-        <img alt="workout-details-image" src="./assets/flexiones.png" class="workout-element-image">
+        <img alt="workout-details-image" src="../assets/flexiones.png" class="workout-element-image">
 
         <div class="workout-details-excercises">
           <excercise-workout-detail></excercise-workout-detail>

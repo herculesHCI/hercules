@@ -7,8 +7,6 @@
 
 <script>
 
-
-
 import MyProfile from "@/views/MyProfile";
 import HeaderComp from "@/components/header-comp";
 
