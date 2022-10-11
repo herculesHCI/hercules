@@ -1,21 +1,20 @@
 <template>
-  <div>
-    <login-comp id="login-page"></login-comp>
+  <div id="loginOrSign-page">
+    <signup-comp></signup-comp>
   </div>
 </template>
 
+
 <script>
-
-
-import LoginComp from "@/components/login-comp";
+import SignupComp from "@/components/signup-comp";
 export default {
-  name: 'Login-view',
-  components: {LoginComp},
+  name: "SignUp",
+  components: {SignupComp},
 }
 </script>
 
-<style>
-#login-page {
+<style scoped>
+#loginOrSign-page {
   font-family: "Dalek Pinpoint", "AbhayaLibre-ExtraBold", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -23,6 +22,5 @@ export default {
   color: black;
   background-Color: #d9d9d9;
 }
+
 </style>
-
-

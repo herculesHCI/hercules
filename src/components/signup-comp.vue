@@ -1,12 +1,17 @@
 <template>
   <div>
-
     <img alt="Hercules logo" src="@/assets/Hercules.png" width="500">
     <h1 class="v-text" style="font-size: 100px">Hercules</h1>
     <div>
       <v-text-field class="input"
                     v-model="username"
                     label="Username"
+      ></v-text-field>
+    </div>
+    <div>
+      <v-text-field class="input"
+                    v-model="email"
+                    label="Email"
       ></v-text-field>
     </div>
     <div>
@@ -18,19 +23,14 @@
                     @click:append="show1 = !show1"
       ></v-text-field>
     </div>
-    <div>
-      <v-btn x-large
-             class="btn black white--text"
-             width="150px"
-             style="font-family: 'Dalek Pinpoint'"
-      >Log In
-      </v-btn>
-    </div>
-    <v-row align="center">
-      <v-divider></v-divider>
-      OR
-      <v-divider></v-divider>
-    </v-row>
+    <v-text-field class="input"
+                  v-model="password2"
+                  :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="show2 ? 'text' : 'password'"
+                  :rules="[rules.samePassword]"
+                  label="Confirm password"
+                  @click:append="show2 = !show2"
+    ></v-text-field>
     <div>
       <v-btn x-large
              width="150px"
@@ -44,12 +44,18 @@
 
 <script>
 export default {
-  name: "login-comp",
+  name: "signup-comp",
   data() {
     return {
-      username: '',
-      password:'',
       show1: false,
+      show2: false,
+      username: '',
+      email: '',
+      password: '',
+      password2: '',
+      rules: {
+        samePassword: (value) => (this.password === value) || 'La contrasenas no coinciden'
+      },
     }
   }
 }
@@ -72,19 +78,5 @@ export default {
   margin-bottom: 20px;
   height: 50px;
   width: 200px;
-}
-
-.btn {
-  margin: 15px;
-}
-
-@font-face {
-  font-family: "Dalek Pinpoint";
-  src: local("DalekPinpointBold"), url(@/fonts/DalekPinpointBold.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "AbhayaLibre-ExtraBold";
-  src: local("AbhayaLibre-ExtraBold"), url(@/fonts/AbhayaLibre-ExtraBold.ttf) format("truetype");
 }
 </style>
