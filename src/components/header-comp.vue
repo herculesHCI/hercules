@@ -7,14 +7,14 @@
       <v-toolbar extended extension-height="10px" elevation="2" >
         <v-img max-width="2em" src="@/assets/HerculesNegro.png"/>
         <v-btn text id="header-comp-style" style="font-size: 30px">Hercules</v-btn>
-        <v-btn
-            v-for="link in links"
-            :key="link"
-            color="#000000"
-            text
-            style="font-family: Inter2"
-        >{{link}}
-        </v-btn>
+          <li v-for="link in links" :key="link.text">
+           <router-link :to="{
+            name:link.name,
+            params:{slug:link.route}
+           }">
+             {{link.text}}
+           </router-link>
+          </li>
         <v-spacer></v-spacer>
         <v-row align-content="center"
                 justify="right">
@@ -41,8 +41,8 @@ export default {
   name: "header-comp",
   data: () => ({
     links: [
-      'Discover',
-      'My Workouts',
+      { text:'Discovers',name: 'Home-Landing', route: '/home' },
+      { text: 'My Workouts', name: 'WorkoutsPage', route: '/WorkoutsPage' },
     ],
   }),
 }

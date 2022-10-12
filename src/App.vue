@@ -1,19 +1,18 @@
 <template>
   <v-app class="" style="background-color: #d9d9d9">
     <header-comp></header-comp>
-    <MyProfile></MyProfile>
+    <v-content>
+    <router-view></router-view>
+    </v-content>
   </v-app>
 </template>
 
 <script>
-
-import MyProfile from "@/views/MyProfile";
 import HeaderComp from "@/components/header-comp";
 
 export default{
   components:{
     HeaderComp,
-    MyProfile,
 
 
   }

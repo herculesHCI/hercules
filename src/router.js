@@ -4,6 +4,7 @@ import Home from "@/views/Home-Landing.vue";
 import Login from "@/views/Login.vue";
 import WorkoutsPage from "@/views/Workouts-Page";
 import WorkoutsDetail from "@/views/Workouts-Detail";
+import MyProfile from "@/views/MyProfile";
 
 //require('vue-router').default;
 Vue.use(VueRouter);
@@ -28,6 +29,11 @@ const routes = [
         path: "/WorkoutsDetail",
         name: "WorkoutsDetail",
         component: WorkoutsDetail
+    },
+    {
+        path: "/MyProfile",
+        name: "My Profile",
+        component: MyProfile
     }
 ];
 
