@@ -1,6 +1,5 @@
 <template>
   <div class="Workouts-Details-out">
-    <headerComp/>
     <div class="Workouts-Details" id="Workouts-Details" align="center">
 
       <v-icon color="#00000" size="52px" left style="margin-bottom: 25px; float: left">
@@ -10,7 +9,7 @@
       <div class="Individual-Workout-Details" >
         <img alt="workout-details-image" src="../assets/flexiones.png" class="workout-element-image">
 
-        <div class="workout-details-excercises">
+        <div class="workout-details-exercises">
           <excercise-workout-detail></excercise-workout-detail>
           <excercise-workout-detail-img></excercise-workout-detail-img>
           <excercise-workout-detail></excercise-workout-detail>
@@ -24,24 +23,18 @@
 </template>
 
 <script>
-import headerComp from "@/components/header-comp"
-import excerciseWorkoutDetail from "@/components/excercise-workout-detail"
-import excerciseWorkoutDetailImg from "@/components/excercise-workout-detail-img"
+import exerciseWorkoutDetail from "@/components/excercise-workout-detail"
+import exerciseWorkoutDetailImg from "@/components/excercise-workout-detail-img"
 export default{
   components:{
-    headerComp,
-    excerciseWorkoutDetail,
-    excerciseWorkoutDetailImg
+    excerciseWorkoutDetail: exerciseWorkoutDetail,
+    excerciseWorkoutDetailImg: exerciseWorkoutDetailImg
   }
 }
 
 </script>
 
 <style scoped>
-
-.v-icon{
-  cursor:pointer;
-}
 
 .Workouts-Details{
   margin-top: 0 ;
@@ -67,7 +60,7 @@ export default{
   object-fit: cover;
 }
 
-.workout-details-excercises{
+.workout-details-exercises{
   display: grid;
   gap: 1px;
   grid-template-columns: repeat(3, 1fr);

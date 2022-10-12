@@ -1,8 +1,6 @@
 <template>
 
   <div class="Workouts-page" id="Workouts-page">
-    <headerComp/>
-
     <div class="Workouts">
 
       <div class="header-container">

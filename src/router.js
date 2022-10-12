@@ -6,6 +6,7 @@ import SignUp from "@/views/SignUp";
 import WorkoutsPage from "@/views/Workouts-Page";
 import WorkoutsDetail from "@/views/Workouts-Detail";
 import MyProfile from "@/views/MyProfile";
+import Settings from "@/views/Settings-view";
 
 //require('vue-router').default;
 Vue.use(VueRouter);
@@ -40,6 +41,11 @@ const routes = [
         path: "/MyProfile",
         name: "My Profile",
         component: MyProfile
+    },
+    {
+        path: "/Settings",
+        name: "Settings",
+        component: Settings
     }
 ];
 

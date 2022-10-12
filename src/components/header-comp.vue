@@ -4,32 +4,48 @@
             color="#FFFFFF"
             flat
             tile>
-      <v-toolbar extended extension-height="10px" elevation="2" >
+      <v-toolbar extended extension-height="10px" elevation="2">
         <v-img max-width="2em" src="@/assets/HerculesNegro.png"/>
-        <v-btn text id="header-comp-style" style="font-size: 30px">Hercules</v-btn>
-          <li v-for="link in links" :key="link.text">
-           <router-link :to="{
+        <p text id="header-comp-style" style="font-size: 30px">Hercules</p>
+        <router-link v-for="link in links" :key="link.text"
+                     :to="{
             name:link.name,
             params:{slug:link.route}
            }">
-             {{link.text}}
-           </router-link>
-          </li>
+          <v-btn
+              style="font-family: Inter2"
+              class="ml-4"
+              text
+          >{{ link.text }}
+          </v-btn>
+        </router-link>
         <v-spacer></v-spacer>
         <v-row align-content="center"
-                justify="right">
+               justify="right">
           <v-text-field append-icon="mdi-magnify"
                         placeholder="Search Workouts"
                         outlined
                         rounded
                         color="black"
                         class="align-searchbar"/>
-          <v-btn icon color="#000000" x-large>
-            <v-icon>mdi-account-circle-outline</v-icon>
-          </v-btn>
-          <v-btn icon color="#000000" x-large>
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
+          <router-link :to="{
+            name:myProfileLink.name,
+            params:{slug:myProfileLink.route}
+          }">
+            <v-btn icon color="#000000" x-large>
+              <v-avatar>
+                <v-img :src="userImage"></v-img>
+              </v-avatar>
+            </v-btn>
+          </router-link>
+          <router-link :to="{
+            name:settingLink.name,
+            params:{slug:settingLink.route}
+          }">
+            <v-btn icon color="#000000" x-large>
+              <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+          </router-link>
         </v-row>
       </v-toolbar>
     </v-card>
@@ -41,32 +57,39 @@ export default {
   name: "header-comp",
   data: () => ({
     links: [
-      { text:'Discovers',name: 'Home-Landing', route: '/home' },
-      { text: 'My Workouts', name: 'WorkoutsPage', route: '/WorkoutsPage' },
+      {text: 'Discover', name: 'Home-Landing', route: '/home'},
+      {text: 'My Workouts', name: 'WorkoutsPage', route: '/WorkoutsPage'},
     ],
+    myProfileLink: {name: 'My Profile', route: '/MyProfile'},
+    settingLink:{name:'Settings',route:'/Settings'},
+    userImage: "https://www.biografiacortade.com/wp-content/uploads/2018/09/socrates-imagen.jpg"
   }),
 }
 </script>
 
 <style scoped>
-#header-comp-style{
-  font-family: "Dalek Pinpoint",Inter2;
+#header-comp-style {
+  font-family: "Dalek Pinpoint", Inter2;
+  margin: auto auto auto 10px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
   size: 30px;
   color: #000000;
 }
-.align-searchbar{
+
+.align-searchbar {
   font-family: Inter2;
   max-height: 45px;
 }
+
 @font-face {
   font-family: "Dalek Pinpoint";
   src: local("DalekPinpointBold"), url(@/fonts/DalekPinpointBold.ttf) format("truetype");
 }
+
 @font-face {
   font-family: Inter2;
-  src: local(Inter-VariableFont),url(@/fonts/Inter-VariableFont.ttf) format("truetype");
+  src: local(Inter-VariableFont), url(@/fonts/Inter-VariableFont.ttf) format("truetype");
 }
 </style>

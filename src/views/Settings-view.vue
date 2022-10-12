@@ -1,6 +1,6 @@
 <template>
   <div id="setting-style">
-    <v-btn large class="back-btn">
+    <v-btn large class="back-btn"  @click="$router.go(-1)">
       <v-icon>mdi-arrow-left-bold</v-icon>
     </v-btn>
     <settings-comp></settings-comp>
