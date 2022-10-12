@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/Home-Landing.vue";
 import Login from "@/views/Login.vue";
+import SignUp from "@/views/SignUp";
 import WorkoutsPage from "@/views/Workouts-Page";
 import WorkoutsDetail from "@/views/Workouts-Detail";
 import MyProfile from "@/views/MyProfile";
@@ -11,7 +12,7 @@ Vue.use(VueRouter);
 
 const routes = [
     {
-        path: "/",
+        path: "/home",
         name: "Home-Landing",
         component: Home
     },
@@ -19,6 +20,11 @@ const routes = [
         path: "/login",
         name: "Login",
         component: Login
+    },
+    {
+        path: "/",
+        name: "signup",
+        component: SignUp
     },
     {
         path: "/WorkoutsPage",

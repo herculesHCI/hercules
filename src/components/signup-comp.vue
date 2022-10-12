@@ -36,6 +36,7 @@
              width="150px"
              class="btn white 10px black--text"
              style="font-family: 'Dalek Pinpoint'"
+             @click="signUp"
       >Sign Up
       </v-btn>
     </div>
@@ -56,6 +57,18 @@ export default {
       rules: {
         samePassword: (value) => (this.password === value) || 'La contrasenas no coinciden'
       },
+    }
+  },
+  methods:{
+    signUp(){
+      if(this.username===null || this.email===null || this.password===null || this.password2===null) {
+        console.log("Faltan completar campos"); //  ESTO HABRIA QUE HACERLO UN POPUP
+      }else{
+        console.log( "user:" + this.username );
+        console.log( "email:" + this.email );
+        console.log( "pass:" + this.password );
+        console.log( "pass2:" + this.password2);
+      }
     }
   }
 }
