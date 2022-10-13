@@ -27,11 +27,9 @@
 </template>
 
 <script>
-import headerComp from "@/components/header-comp"
 import workoutElement from "@/components/workout-element"
 export default{
   components:{
-    headerComp,
     workoutElement
   }
 }

@@ -23,6 +23,7 @@
              class="btn black white--text"
              width="150px"
              style="font-family: 'Dalek Pinpoint'"
+             @click="login()"
       >Log In
       </v-btn>
     </div>
@@ -43,14 +44,61 @@
 </template>
 
 <script>
+import {mapState, mapActions} from "pinia"
+import {useSecurityStore} from "@/store/SecurityStore";
+import {Credentials} from "@/api/user";
+
 export default {
   name: "login-comp",
   data() {
     return {
       username: '',
-      password:'',
+      password: '',
       show1: false,
     }
+  },
+
+  computed: {
+    ...mapState(useSecurityStore, {
+      $user: state => state.user,
+    }),
+    ...mapState(useSecurityStore, {
+      $isLoggedIn: 'isLoggedIn'
+    }),
+  },
+  methods: {
+    ...mapActions(useSecurityStore, {
+      $getCurrentUser: 'getCurrentUser',
+      $login: 'login',
+      $logout: 'logout',
+    }),
+    setResult(result){
+      this.result = JSON.stringify(result, null, 2)
+    },
+    clearResult() {
+      this.result = null
+    },
+    async login() {
+      try {
+        const credentials = new Credentials('johndoe', '1234567890')
+        await this.$login(credentials, true)
+        this.clearResult()
+      } catch (e) {
+        this.setResult(e)
+      }
+    },
+    async logout() {
+      await this.$logout()
+      this.clearResult()
+    },
+    async getCurrentUser() {
+      await this.$getCurrentUser()
+      this.setResult(this.$user)
+    },
+  },
+  async created() {
+    const securityStore = useSecurityStore();
+    await securityStore.initialize();
   }
 }
 </script>
