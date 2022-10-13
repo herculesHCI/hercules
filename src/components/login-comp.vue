@@ -80,7 +80,7 @@ export default {
     },
     async login() {
       try {
-        const credentials = new Credentials('johndoe', '1234567890')
+        const credentials = new Credentials('bot3', '1234567890')
         await this.$login(credentials, true)
         this.clearResult()
       } catch (e) {
