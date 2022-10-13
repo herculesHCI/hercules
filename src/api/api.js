@@ -54,7 +54,7 @@ class Api {
         return await Api.myFetch(url, secure,{
             method: "POST",
             headers:{
-                "Content-Type": "application/json; charset=utf-"
+                "Content-Type": "application/json; charset=utf-8"
             },
             body: JSON.stringify(data)
         });
@@ -64,7 +64,7 @@ class Api {
         return await Api.myFetch(url, secure, {
             method: "PUT",
             headers:{
-                "Content-Type": "application/json; charset=utf-"
+                "Content-Type": "application/json; charset=utf-8"
             },
             body: JSON.stringify(data)
         });
