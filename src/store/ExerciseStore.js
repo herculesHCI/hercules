@@ -1,6 +1,5 @@
-import { Api } from "@/api/api";
 import { defineStore } from "pinia";
-import { ExercisesApi,} from "@/api/exercises";
+import { ExercisesApi } from "@/api/exercises";
 
 
 export const useExerciseStore = defineStore("exercise", {
@@ -28,7 +27,6 @@ export const useExerciseStore = defineStore("exercise", {
             this.items = sports;
         },
         async add(exercise){
-          console.log(Api.token);
           const result = await ExercisesApi.addExercise(exercise);
           if(!this.findIndex(result)){
               this.push(result);
