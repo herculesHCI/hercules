@@ -5,8 +5,9 @@
       <div class="excercise-detail-top">
         <v-column>
           <p style="float: left" >Squat</p>
-          <v-icon size=36px style="float: left; color:#000000;"> mdi-menu-down </v-icon>
-          <v-icon size=36px style="float: right; color:#000000; padding-right: 20px"> mdi-pencil-box </v-icon>
+          <v-btn icon @click="getExercise(4)"><v-icon size=36px style="float: left; color:#000000;"> mdi-menu-down </v-icon></v-btn>
+          <v-btn icon @click="deleteExercise(5)"><v-icon size=36px style="float: left; color:#000000;"> mdi-pencil-box </v-icon></v-btn>
+
         </v-column>
       </div>
 
@@ -33,12 +34,78 @@
 </template>
 
 <script>
-  import detailTextLine from "./excercise-detail-text-line"
+import detailTextLine from "./excercise-detail-text-line";
+import {mapActions} from "pinia";
+import  {useExerciseStore} from "@/store/ExerciseStore";
+import {Exercise} from "@/api/exercises";
+
 export default {
-    components:{
-      detailTextLine
+  name: "excercise-workout-detail-img",
+  components:{
+    detailTextLine
+  },
+
+  methods: {
+    ...mapActions(useExerciseStore, {
+      $getAllExercises: 'getAll',
+      $getExercise: 'get',
+      $addExercise: 'add',
+      $modifyExercise: 'modify',
+      $deleteExercise: 'delete',
+    }),
+
+    setResult(result) {
+      this.result = JSON.stringify(result, null, 2)
     },
-    name: "excercise-workout-detail-img"
+    clearResult() {
+      this.result = null
+    },
+
+    async getAllExercises() {
+      try {
+        const ret = await this.$getAllExercises();
+        this.clearResult();
+        return ret;
+      } catch(e) {
+        this.setResult(e);
+      }
+    },
+    async getExercise(id) {
+      try{
+        const ret = await this.$getExercise(id);
+        this.clearResult();
+        return ret;
+      } catch(e) {
+        this.setResult(e);
+      }
+    },
+    async addExercise(name, detail) {
+      try {
+        const exercise = new Exercise(name, detail);
+        await this.$addExercise(exercise);
+        this.clearResult();
+      } catch(e) {
+        this.setResult(e);
+      }
+    },
+    async modifyExercise(id, name, detail){
+      try{
+        const exercise = new Exercise(name, detail);
+        await this.$modifyExercise(id,exercise);
+        this.clearResult();
+      } catch(e) {
+        this.setResult(e);
+      }
+    },
+    async deleteExercise(id){
+      try{
+        await this.$deleteExercise(id);
+        this.clearResult();
+      } catch(e) {
+        this.setResult();
+      }
+    }
+  }
 }
 </script>
 
