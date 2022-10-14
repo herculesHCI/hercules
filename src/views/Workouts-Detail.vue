@@ -11,25 +11,22 @@
 
         <div class="workout-details-exercises">
           <excercise-workout-detail></excercise-workout-detail>
-          <excercise-workout-detail-img></excercise-workout-detail-img>
           <excercise-workout-detail></excercise-workout-detail>
           <excercise-workout-detail></excercise-workout-detail>
         </div>
       </div>
-
 
     </div>
   </div>
 </template>
 
 <script>
-import exerciseWorkoutDetail from "@/components/excercise-workout-detail"
-import exerciseWorkoutDetailImg from "@/components/excercise-workout-detail-img"
+import exerciseWorkoutDetail from "@/components/excercise-workout-detail";
+
 export default{
   components:{
-    excerciseWorkoutDetail: exerciseWorkoutDetail,
-    excerciseWorkoutDetailImg: exerciseWorkoutDetailImg
-  }
+    excerciseWorkoutDetail: exerciseWorkoutDetail
+  },
 }
 
 </script>
