@@ -48,7 +48,7 @@ class Api {
     }
 
     static async get(url, secure){
-        return await Api.myFetch(url, secure);
+        return await Api.myFetch(url, secure, {} );
     }
 
     static async post(url,secure,data){
