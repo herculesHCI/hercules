@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
 import { CyclesExercisesApi } from "@/api/cyclesExercise";
 
-export const userCyclesExerciseStore = defineStore( "cyclesExercise", {
+export const useCyclesExerciseStore = defineStore( "cyclesExercise", {
     state: () => ({
         items:[],
     }),
