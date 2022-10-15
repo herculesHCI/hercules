@@ -53,6 +53,9 @@ export const useRoutineStore = defineStore("routine", {
         },
         async getAll(controller) {
             return await RoutinesApi.getAll(controller);
+        },
+        async mostUpvoted() {
+            return this.items.max
         }
     },
 });

@@ -26,10 +26,9 @@
           <v-icon>mdi-arrow-right</v-icon>
         </v-btn>
       </template>
-      <v-carousel-item v-for="card in items" :key="card"
+      <v-carousel-item v-for="card in items.content" :key="card.id"
       transition="fade-transition">
-        <v-card :loading="loading"
-                class="mx-auto my-12 workoutCardOutline"
+        <v-card class="mx-auto my-12 workoutCardOutline"
                 width="600"
                 style="font-family:Inter2"
         >
@@ -40,19 +39,19 @@
                 indeterminate/>
           </template>
 
-          <v-img max-height="250" :src="card.src"/>
+          <v-img max-height="250" :src="card.metadata" alt="txt kkita"/>
 
-          <v-card-title style="padding-left: 20px">{{ card.workoutName }}
+          <v-card-title style="padding-left: 20px">{{ card.name }}
             <v-spacer/>
-            <v-icon>mdi-star-outline</v-icon>
-            {{ card.rating }} ({{ card.reviewAmount }})
+            <v-icon>mdi-arrow-up-bold-circle</v-icon>
+            {{ card.score }}
           </v-card-title>
 
           <v-card-text style="padding-left: 30px">
             <v-row align="center"
                    class="mx-0">
               <div class="black--text my-4 text-subtitle-1">
-                {{ card.category }}
+                {{ card.category.name }}
               </div>
             </v-row>
           </v-card-text>
@@ -69,52 +68,34 @@
 </template>
 
 <script>
+import {mapState} from "pinia";
+import {useRoutineStore} from "@/store/RoutineStore";
+
 export default {
   name: "carousel-workouts",
   data (){
-    // this.setTrendingRoutines(this.data().items)
     return {
-      items: [
-        {
-          src:'https://i.imgur.com/ehUD0.jpeg',
-          workoutName: "El Nono's Workout",
-          rating: 4.3,
-          reviewAmount: 56,
-          category: 'Cardio',
-        },
-        {
-          src:'https://i.imgur.com/su14xrQ.png',
-          workoutName: "Diego's Workout",
-          rating: 4.9,
-          reviewAmount: 89,
-          category: 'Full Body',
-        },
-        {
-          src:'https://i.imgur.com/gncEZZ8.jpeg',
-          workoutName: "Olympic WL",
-          rating: 4.7,
-          reviewAmount: 32,
-          category: 'Back',
-        }
-      ]
+      items: []
     }
   },
-  // methods: {
-  //   setTrendingRoutines :(items)=> {
-  //     //aca iria a buscar al store pero hardcodeo los de items
-  //     for(let i=0;i < items.length;i++){
-  //       cardsWorkout[i] = new CardWorkout;
-  //       cardsWorkout[i].setWorkout(items[i].workoutName,items[i].category,items[i].rating,items[i].reviewAmount,items[i].src);
-  //     }
-  //   }
-  // },
+  methods: {
+
+  },
+  computed: {
+    ...mapState(useRoutineStore, {
+      $user: state => state.user,
+    }),
+  },
+  async created() {
+    const routineStore = useRoutineStore();
+    this.items = await routineStore.getAll("");
+  }
 }
 </script>
 
 <style scoped>
 #carousel-style{
   font-family: Inter2;
-
 }
 @font-face {
   font-family: Inter2;
