@@ -63,6 +63,18 @@ export const useRoutineStore = defineStore("routine", {
         },
         async rateWorkout(routineId,rating){
             return await ReviewsApi.addReview(routineId,rating,"");
+        },
+        async addCycle(routineID,cycle){
+            return await RoutinesApi.addCycle(routineID, cycle);
+        },
+        async getCycle(RoutineID){
+            return await RoutinesApi.getCycles(RoutineID);
+        },
+        async editCycle(routineID, cycleID, cycle){
+            return await RoutinesApi.modify(routineID, cycleID, cycle);
+        },
+        async deleteCycle(routineID, cycleID){
+            return await RoutinesApi.deleteCycle(routineID,cycleID);
         }
     },
 });

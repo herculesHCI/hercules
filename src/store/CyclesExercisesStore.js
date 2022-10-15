@@ -26,11 +26,7 @@ export const userCyclesExerciseStore = defineStore( "cyclesExercise", {
             this.items = cyclesExercise;
         },
         async add(cycleID, exerciseID, exercise){
-            const result = await CyclesExercisesApi.addCycleExercise(cycleID, exerciseID, exercise);
-            if(!this.findIndex(result)){
-                this.push(result);
-            }
-            return result;
+            return await CyclesExercisesApi.addCycleExercise(cycleID, exerciseID, exercise);
         },
         async get(cycleID){
             return await CyclesExercisesApi.getCycleExercises(cycleID);
