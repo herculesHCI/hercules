@@ -23,8 +23,15 @@ class RoutinesApi{
         return await Api.get(RoutinesApi.getUrl(routine.id), true,routine.id);
     }
 
-    static async getAll(controller){
-        return await Api.get(RoutinesApi.getUrl(), true,controller);
+    static async getAll(pageNum,orderBy,size,direction,query,filter,filterVal,controller){
+        let finalUrl = `${RoutinesApi.getUrl()}?page=${pageNum-1}&size=${size}&orderBy=${orderBy}&direction=${direction}`
+        if(query.length >= 3){
+            finalUrl += `search=${query}`;
+        }
+        if(filter.filterActualName){
+            finalUrl+=`&${filter.filterActualName}=${filterVal}`;
+        }
+        return await Api.get(finalUrl, true,controller);
     }
 
     static async addCycle(routineId,cycle,controller) {

@@ -88,7 +88,7 @@ export default {
   },
   async created() {
     const routineStore = useRoutineStore();
-    this.items = await routineStore.getAll("");
+    this.items = await routineStore.mostUpvoted();
   }
 }
 </script>

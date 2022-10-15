@@ -1,6 +1,6 @@
 <template>
   <div id="home-landing">
-    <h1 class="font-weight-medium" style="font-family: Inter2">Trending Routines</h1>
+    <h1 class="font-weight-medium" style="font-family: Inter2">Top Routines</h1>
     <div>
       <carousel-workouts/>
     </div>

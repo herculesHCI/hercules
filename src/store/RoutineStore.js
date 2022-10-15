@@ -1,5 +1,7 @@
 import {defineStore} from "pinia";
 import {RoutinesApi} from "@/api/routines";
+import {ReviewsApi} from "@/api/review";
+import filterTypes from "@/api/filter";
 
 export const useRoutineStore = defineStore("routine", {
     state: () => ({ items: [] }),
@@ -51,11 +53,16 @@ export const useRoutineStore = defineStore("routine", {
             this.push(result);
             return result;
         },
-        async getAll(controller) {
-            return await RoutinesApi.getAll(controller);
+        async getAll(pageNum,orderBy,direction,query,filter,filterVal,controller) {
+            return await RoutinesApi.getAll(pageNum,orderBy,direction,query,filter,filterVal,controller);
         },
-        async mostUpvoted() {
-            return this.items.max
+        async mostUpvoted() {//Muestra el top 4 con mas upvotes
+            const filter = filterTypes;
+            filter.filterActualName="";
+            return await RoutinesApi.getAll(1,"score",4,"desc","",filter,"","");
+        },
+        async rateWorkout(routineId,rating){
+            return await ReviewsApi.addReview(routineId,rating,"");
         }
     },
 });
