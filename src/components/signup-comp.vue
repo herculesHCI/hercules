@@ -23,27 +23,87 @@
                     @click:append="show1 = !show1"
       ></v-text-field>
     </div>
-    <v-text-field class="input"
-                  v-model="password2"
-                  :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                  :type="show2 ? 'text' : 'password'"
-                  :rules="[rules.samePassword]"
-                  label="Confirm password"
-                  @click:append="show2 = !show2"
-    ></v-text-field>
+    <div>
+      <v-text-field class="input"
+                    v-model="password2"
+                    :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                    :type="show2 ? 'text' : 'password'"
+                    :rules="[rules.samePassword]"
+                    label="Confirm password"
+                    @click:append="show2 = !show2"
+      ></v-text-field>
+    </div>
+    <div>
+      <v-text-field class="input"
+                    v-model="avatar"
+                    label="Link to image (Profile Image)"
+      ></v-text-field>
+    </div>
+    <div>
+      <v-text-field class="input"
+                    v-model="frase"
+                    label="Motivation quote"
+      ></v-text-field>
+    </div>
+    <div>
+      <v-text-field class="input"
+                    v-model="age"
+                    label="Age"
+                    @keypress="isNumber($event)"
+      ></v-text-field>
+    </div>
+    <div>
+      <v-text-field class="input"
+                    v-model="weight"
+                    label="Weight (in kg)"
+                    @keypress="isNumber($event)"
+      ></v-text-field>
+    </div>
+    <div>
+      <v-text-field class="input"
+                    v-model="height"
+                    label="Height (in cm)"
+                    @keypress="isNumber($event)"
+      ></v-text-field>
+    </div>
+    <div v-show="sentCode">
+      <v-text-field class="input"
+                    v-model="code"
+                    label="Code"
+                    @keypress="isNumber($event)"
+      ></v-text-field>
+      <v-btn x-large
+             width="150px"
+             class="btn white 10px black--text mb-10"
+             style="font-family: 'Dalek Pinpoint'"
+             @click="verifyEmail()"
+      > Verify email
+      </v-btn>
+    </div>
+    <div v-show="error">
+      <p style="font-family: Inter;color: red">{{ errormsg }}</p>
+    </div>
     <div>
       <v-btn x-large
              width="150px"
              class="btn white 10px black--text"
              style="font-family: 'Dalek Pinpoint'"
-             @click="signUp"
-      >Sign Up
+             @click="signUp()"
+      > Sign Up
       </v-btn>
     </div>
+    <v-container>
+
+    </v-container>
   </div>
 </template>
 
 <script>
+import {createdCredentials} from "@/api/user";
+import {mapActions, mapState} from "pinia";
+import {useSecurityStore} from "@/store/SecurityStore";
+import router from "@/router";
+
 export default {
   name: "signup-comp",
   data() {
@@ -54,22 +114,74 @@ export default {
       email: '',
       password: '',
       password2: '',
+      avatar: '',
+      frase: '',
+      age: '',
+      weight: '',
+      height: '',
+      sentCode:false,
+      code:'',
+      errormsg: '',
+      error: false,
       rules: {
-        samePassword: (value) => (this.password === value) || 'La contrasenas no coinciden'
-      },
-    }
-  },
-  methods:{
-    signUp(){
-      if(this.username===null || this.email===null || this.password===null || this.password2===null) {
-        console.log("Faltan completar campos"); //  ESTO HABRIA QUE HACERLO UN POPUP
-      }else{
-        console.log( "user:" + this.username );
-        console.log( "email:" + this.email );
-        console.log( "pass:" + this.password );
-        console.log( "pass2:" + this.password2);
+        samePassword: (value) => (this.password === value) || 'Passwords dont match'
       }
     }
+  },
+  computed:{
+    ...mapState(useSecurityStore, {
+      $user: state => state.user,
+    }),
+  },
+  methods: {
+    ...mapActions(useSecurityStore, {
+      $createUser:'createUser',
+      $verifyEmail:'verifyEmail'
+    }),
+    async signUp() {
+      if (this.username === '' || this.email === '' || this.password === '' || this.password2 == '' || this.avatar == '' || this.frase === '' || this.age === '' || this.weight === '' || this.height === '') {
+        this.errormsg = "There are empty fields";
+        this.error = true;
+      } else {
+        try {
+          const metadata={age:this.age,frase:this.frase,weight:this.weight,height:this.height}
+          const credentials = new createdCredentials(this.username, this.password, this.email, this.avatar, metadata);
+          await this.$createUser(credentials);
+          this.error=false
+          this.sentCode=true
+        } catch (e){
+          this.errormsg = 'Error signing up, check information provided'
+          this.error = true
+        }
+      }
+    },
+    async verifyEmail(){
+      if (this.code==='') {
+        this.errormsg='The code field is empty'
+        this.error=true
+      }else{
+        try{
+          await this.$verifyEmail(this.email,this.code)
+          router.push('/')
+        }catch (e){
+          this.errormsg="Code is incorrect"
+          this.error=true
+        }
+      }
+    },
+    isNumber: function (evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();
+      } else {
+        return true;
+      }
+    }
+  },
+  async created() {
+    const securityStore = useSecurityStore();
+    await securityStore.initialize();
   }
 }
 </script>
@@ -77,7 +189,7 @@ export default {
 <style scoped>
 
 .input {
-  font-family: AbhayaLibre-ExtraBold;;
+  font-family: AbhayaLibre-ExtraBold;
   border: 1px solid grey;
   border-radius: 5px;
   text-align: left;
