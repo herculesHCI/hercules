@@ -33,9 +33,7 @@
             params:{slug:myProfileLink.route}
           }">
             <v-btn icon color="#000000" x-large>
-              <v-avatar>
-                <v-img :src="userImage"></v-img>
-              </v-avatar>
+              <v-icon>mdi-account-circle-outline</v-icon>
             </v-btn>
           </router-link>
           <router-link :to="{
@@ -53,6 +51,9 @@
 </template>
 
 <script>
+import {mapState} from "pinia";
+import {useSecurityStore} from "@/store/SecurityStore";
+
 export default {
   name: "header-comp",
   data: () => ({
@@ -62,8 +63,17 @@ export default {
     ],
     myProfileLink: {name: 'My Profile', route: '/MyProfile'},
     settingLink:{name:'Settings',route:'/Settings'},
-    userImage: "https://www.biografiacortade.com/wp-content/uploads/2018/09/socrates-imagen.jpg"
+    userImage:[]
   }),
+  computed: {
+    ...mapState(useSecurityStore, {
+      $user: state => state.user,
+    }),
+  },
+   async created( ){
+    const securityStore = useSecurityStore();
+    await securityStore.getCurrentUser();
+  }
 }
 </script>
 

@@ -1,18 +1,16 @@
 <template>
-  <v-app class="" style="background-color: #d9d9d9">
-    <header-comp></header-comp>
+  <v-app style="background-color: #d9d9d9">
     <v-content>
-      <router-view></router-view>
+    <router-view></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HeaderComp from "@/components/header-comp";
 
-export default{
-  components:{
-    HeaderComp,
+export default {
+  components: {
+
   }
 }
 </script>

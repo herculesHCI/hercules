@@ -11,6 +11,7 @@ class UserApi{
         return await Api.post(UserApi.getUrl(),false,createdCredentials);
     }
 
+
     static async verifyEmail(email,code){
         return await Api.post(UserApi.getUrl('verify_email'),false,{email,code})
     }
