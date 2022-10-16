@@ -2,7 +2,7 @@
   <div>
     <v-card class="box">
       <h1 style="padding-bottom: 50px">Settings</h1>
-        <v-btn  color="red--text" @click="logoutProfile">Log out</v-btn>
+        <v-btn  color="red--text" @click="logoutProfile()">Log out</v-btn>
     </v-card>
   </div>
 </template>
@@ -14,6 +14,11 @@ import router from "@/router";
 
 export default {
   name: "settings-comp",
+  data(){
+    return{
+      myProfileLogout:null
+    }
+  },
   computed: {
     ...mapState(useSecurityStore, {
       $user: state => state.user,
@@ -24,17 +29,15 @@ export default {
       $logout: 'logout',
     }),
     async logoutProfile(){
-      try{
-          this.$logout
-          router.push('/')
-      }catch (e){
-       return
-      }
+      this.myProfileLogout=true
+      await router.push('/')
     }
   },
   async created() {
     const securityStore = useSecurityStore();
     await securityStore.initialize();
+    if(this.myProfileLogout)
+      await securityStore.logout()
   }
 }
 </script>

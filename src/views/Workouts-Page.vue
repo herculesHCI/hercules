@@ -53,11 +53,6 @@ export default{
     const securityStore = useSecurityStore();
     const routineStore = useRoutineStore();
     await securityStore.initialize();
-    // if(!securityStore.loggedIn()){
-    //   //No le tengo que dejar acceso o sea tengo que hacer un
-    //   //rounter.push("accessDenied")
-    //   return;
-    // }
     this.userWorkouts = await routineStore.getUserRoutines( "bot3");
     if(Array.isArray(this.userWorkouts) && this.userWorkouts.length === 0){
       this.emptyFlag=true;
