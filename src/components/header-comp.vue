@@ -16,6 +16,7 @@
               style="font-family: Inter2"
               class="ml-4"
               text
+              @click="toPath(link.route)"
           >{{ link.text }}
           </v-btn>
         </router-link>
@@ -53,6 +54,7 @@
 </template>
 
 <script>
+import router from "@/router";
 export default {
   name: "header-comp",
   data: () => ({
@@ -64,6 +66,11 @@ export default {
     settingLink:{name:'Settings',route:'/Settings'},
     userImage: "https://www.biografiacortade.com/wp-content/uploads/2018/09/socrates-imagen.jpg"
   }),
+  methods:{
+    toPath(linkpath){
+      router.push({ path: linkpath })
+    }
+  }
 }
 </script>
 

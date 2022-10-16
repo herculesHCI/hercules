@@ -71,7 +71,7 @@ export const useRoutineStore = defineStore("routine", {
             return await RoutinesApi.getCycles(RoutineID);
         },
         async editCycle(routineID, cycleID, cycle){
-            return await RoutinesApi.modify(routineID, cycleID, cycle);
+            return await RoutinesApi.editCycle(routineID, cycleID, cycle);
         },
         async deleteCycle(routineID, cycleID){
             return await RoutinesApi.deleteCycle(routineID,cycleID);
