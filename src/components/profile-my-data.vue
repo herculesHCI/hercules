@@ -71,7 +71,7 @@ export default {
       return parseInt(50 + (0.91 * (height - 152.4)))
     }
   },
-  async beforeMount() {
+  async mounted() {
     const securityStore = useSecurityStore();
     await securityStore.initialize();
     const data = await securityStore.getCurrentUser();

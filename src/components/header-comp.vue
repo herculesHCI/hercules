@@ -16,12 +16,13 @@
               style="font-family: Inter2"
               class="ml-4"
               text
+              @click="toPath(link.route)"
           >{{ link.text }}
           </v-btn>
         </router-link>
         <v-spacer></v-spacer>
         <v-row align-content="center"
-               >
+               justify="right">
           <v-text-field append-icon="mdi-magnify"
                         placeholder="Search Workouts"
                         outlined
@@ -33,7 +34,9 @@
             params:{slug:myProfileLink.route}
           }">
             <v-btn icon color="#000000" x-large>
-              <v-icon>mdi-account-circle-outline</v-icon>
+              <v-avatar>
+                <v-img :src="userImage"></v-img>
+              </v-avatar>
             </v-btn>
           </router-link>
           <router-link :to="{
@@ -51,9 +54,7 @@
 </template>
 
 <script>
-import {mapState} from "pinia";
-import {useSecurityStore} from "@/store/SecurityStore";
-
+import router from "@/router";
 export default {
   name: "header-comp",
   data: () => ({
@@ -63,16 +64,12 @@ export default {
     ],
     myProfileLink: {name: 'My Profile', route: '/MyProfile'},
     settingLink:{name:'Settings',route:'/Settings'},
-    userImage:[]
+    userImage: "https://www.biografiacortade.com/wp-content/uploads/2018/09/socrates-imagen.jpg"
   }),
-  computed: {
-    ...mapState(useSecurityStore, {
-      $user: state => state.user,
-    }),
-  },
-   async created( ){
-    const securityStore = useSecurityStore();
-    await securityStore.getCurrentUser();
+  methods:{
+    toPath(linkpath){
+      router.push({ path: linkpath })
+    }
   }
 }
 </script>

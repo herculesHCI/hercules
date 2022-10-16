@@ -9,11 +9,21 @@
 import HeaderComp from "@/components/header-comp";
 import {useRoutineStore} from "@/store/RoutineStore";
 import {Category} from "@/api/categories";
+import {useSecurityStore} from "@/store/SecurityStore";
+import router from "@/router";
+import {mapState} from "pinia";
+
 
 export default {
   name: "main-comp",
   components: {HeaderComp},
   async created(){
+    const securityStore = useSecurityStore();
+    await securityStore.initialize();
+    if(!this.$isLoggedIn){
+      router.push("/accessDenied")
+      return;
+    }
     const routineStore = useRoutineStore();
     await routineStore.createCategory(new Category("Back"));
     await routineStore.createCategory(new Category("Legs"));
@@ -24,7 +34,14 @@ export default {
     await routineStore.createCategory(new Category("Arms"));
     await routineStore.createCategory(new Category("Cardio"));
     await routineStore.createCategory(new Category("Full Body"));
-  }
+  },
+  computed: {
+    ...mapState(useSecurityStore, {
+      $user: state => state.user,
+    }),
+    ...mapState(useSecurityStore, {
+      $isLoggedIn: 'isLoggedIn'
+    })},
 }
 </script>
 
