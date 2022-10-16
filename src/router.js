@@ -8,6 +8,7 @@ import WorkoutsDetail from "@/views/Workouts-Detail";
 import MyProfile from "@/views/MyProfile";
 import Settings from "@/views/Settings-view";
 import main from "@/components/main-comp";
+import accessDenied from "@/views/accessDenied";
 
 //require('vue-router').default;
 Vue.use(VueRouter);
@@ -22,6 +23,11 @@ const routes = [
         path: "/signup",
         name: "signup",
         component: SignUp
+    },
+    {
+        path:"/accessDenied",
+        name:"accessDenied",
+        component: accessDenied
     },
     {
         path:'/main',
