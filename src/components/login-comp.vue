@@ -77,7 +77,7 @@ export default {
       $login: 'login',
     }),
     async login() {
-      if (this.username != '' && this.password != '') {
+      if (this.username !== '' && this.password !== '') {
         try {
           const credentials = new Credentials(this.username, this.password)
           await this.$login(credentials, false)

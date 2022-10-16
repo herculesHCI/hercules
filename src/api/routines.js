@@ -55,10 +55,13 @@ class RoutinesApi{
 }
 
 class Routine{
-    constructor(id, name, detail) {
-        this.id = id;
+    constructor(name,category,src) {
         this.name = name;
-        this.detail = detail;
+        this.detail ="";
+        this.isPublic = true;
+        this.metadata=src;
+        this.category = category;
+        this.difficulty = "rookie"
     }
 }
 

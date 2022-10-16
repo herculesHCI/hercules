@@ -3,17 +3,21 @@
   <div class="Workouts-page" id="Workouts-page">
     <div class="Workouts">
 
-      <div class="header-container">
-        <h1 style="font-size: 50px">My Workouts</h1>
-        <v-icon
-            color="#000000" size="52px">
-          mdi-filter-variant
-        </v-icon>
-        <v-icon
-            color="#204dee" size="52px">
-          mdi-plus-circle
-        </v-icon>
-      </div>
+      <v-row class="header-container">
+        <h1>My Workouts</h1>
+        <v-btn icon>
+          <v-icon
+              color="#000000" size="48px">
+            mdi-filter-variant
+          </v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon
+              color="#204dee" size="48px">
+            mdi-plus-circle
+          </v-icon>
+        </v-btn>
+      </v-row>
 
       <v-container >
         <v-row align="center" v-show="!emptyFlag">
@@ -40,6 +44,7 @@
 import workoutElement from "@/components/workout-element"
 import {useSecurityStore} from "@/store/SecurityStore";
 import {useRoutineStore} from "@/store/RoutineStore";
+import router from "@/router";
 export default{
   data(){
     return {
@@ -53,7 +58,12 @@ export default{
     const securityStore = useSecurityStore();
     const routineStore = useRoutineStore();
     await securityStore.initialize();
-    this.userWorkouts = await routineStore.getUserRoutines( "bot3");
+    const user =  await securityStore.getCurrentUser();
+    if(user === null){
+      await router.push("accessDenied");
+      return;
+    }
+    this.userWorkouts = await routineStore.getUserRoutines(user.username);
     if(Array.isArray(this.userWorkouts) && this.userWorkouts.length === 0){
       this.emptyFlag=true;
     }
@@ -82,11 +92,5 @@ export default{
   width:90%;
   grid-template-columns: 85% 10% 5%;
   display: grid;
-}
-
-.workouts-container{
-  padding-top: 15px;
-  position:relative;
-  object-position: center;
 }
 </style>
