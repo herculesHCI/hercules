@@ -36,14 +36,6 @@
               <v-icon>mdi-account-circle-outline</v-icon>
             </v-btn>
           </router-link>
-          <router-link :to="{
-            name:settingLink.name,
-            params:{slug:settingLink.route}
-          }">
-            <v-btn icon color="#000000" x-large>
-              <v-icon>mdi-dots-vertical</v-icon>
-            </v-btn>
-          </router-link>
         </v-row>
       </v-toolbar>
     </v-card>

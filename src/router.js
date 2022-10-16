@@ -6,7 +6,6 @@ import SignUp from "@/views/SignUp";
 import WorkoutsPage from "@/views/Workouts-Page";
 import WorkoutsDetail from "@/views/Workouts-Detail";
 import MyProfile from "@/views/MyProfile";
-import Settings from "@/views/Settings-view";
 import main from "@/components/main-comp";
 import accessDenied from "@/views/accessDenied";
 
@@ -51,12 +50,7 @@ const routes = [
             {
                 path: "MyProfile",
                 name: "My Profile",
-                component: MyProfile
-            },
-            {
-                path: "Settings",
-                name: "Settings",
-                component: Settings
+                component: MyProfile,
             }]},
 
 ];
