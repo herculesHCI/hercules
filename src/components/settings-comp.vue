@@ -33,7 +33,7 @@ export default {
       await router.push('/')
     }
   },
-  async created() {
+  async beforeRouteLeave() {
     const securityStore = useSecurityStore();
     await securityStore.initialize();
     if(this.myProfileLogout)
