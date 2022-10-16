@@ -19,8 +19,8 @@ class RoutinesApi{
         return await Api.delete(RoutinesApi.getUrl(routine.id), true,routine.id)
     }
 
-    static async get(routine){
-        return await Api.get(RoutinesApi.getUrl(routine.id), true,routine.id);
+    static async get(routineId){
+        return await Api.get(RoutinesApi.getUrl(routineId), true,routineId);
     }
 
     static async getAll(pageNum,orderBy,size,direction,query,filter,filterVal,controller){
@@ -47,6 +47,10 @@ class RoutinesApi{
 
     static async getCycles(routineId,controller) {
         return await Api.get(`${RoutinesApi.getUrl()}/${routineId}/cycles`, true, controller);
+    }
+
+    static async getUserRoutines(){
+        return await Api.get(`${RoutinesApi.getUrl()}?page=0&size=20&orderBy=date&direction=asc`,true,"");
     }
 }
 

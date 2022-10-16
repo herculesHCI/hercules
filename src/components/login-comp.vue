@@ -56,8 +56,8 @@ export default {
   name: "login-comp",
   data() {
     return {
-      username: '',
-      password: '',
+      username: null,
+      password: null,
       errmsg: '',
       show1: false,
       error: false
@@ -81,12 +81,12 @@ export default {
         try {
           const credentials = new Credentials(this.username, this.password)
           await this.$login(credentials, false)
+          if (this.$isLoggedIn)
+            await router.push('main/home')
         } catch (e){
           this.errmsg = 'Couldn\'t find user or password is incorrect'
           this.error = true
         }
-        if (this.$isLoggedIn)
-          await router.push('home')
       } else {
         this.errmsg = 'There are empty fields'
         this.error = true

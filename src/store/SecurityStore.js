@@ -52,10 +52,10 @@ export const useSecurityStore = defineStore("security", {
 
             const result = await UserApi.get();
             this.setUser(result);
+            return this.user;
         },
         async createUser(credentials){
-             const result=await UserApi.addUser(credentials);
-             this.setUser(result.user)
+             await UserApi.addUser(credentials);
         },
         async verifyEmail(email,code){
             await UserApi.verifyEmail(email,code)

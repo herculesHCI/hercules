@@ -6,9 +6,6 @@
         <v-avatar size="280px">
           <v-img :src="profilePic"></v-img>
         </v-avatar>
-        <v-btn icon color="#204DEE" class="pencilbtn">
-          <v-icon size="80">mdi-pencil-circle</v-icon>
-        </v-btn>
       </v-card>
     </div>
     <div>
@@ -23,13 +20,29 @@
 </template>
 
 <script>
+import {mapState} from "pinia";
+import {useSecurityStore} from "@/store/SecurityStore";
+
 export default {
   name: "ProfilePreview",
   data:()=>({
-    username: 'Rey de hades',
-    motivation: 'Matar a hercules',
-    profilePic:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Hades_Altemps_Inv8584_n2.jpg/220px-Hades_Altemps_Inv8584_n2.jpg",
-  })
+    username: '',
+    motivation: '',
+    profilePic:'',
+  }),
+  computed: {
+    ...mapState(useSecurityStore, {
+      $user: state => state.user,
+    }),
+  },
+  async created() {
+    const securityStore = useSecurityStore();
+    await securityStore.initialize();
+    const userData=await securityStore.getCurrentUser();
+    this.username=userData.username
+    this.motivation=userData.metadata.frase
+    this.profilePic=userData.avatarUrl
+  }
 }
 </script>
 
@@ -42,11 +55,6 @@ export default {
   padding-top: 20px;
 }
 
-.pencilbtn {
-  margin-top: 200px;
-  margin-right: 100px;
-  position: absolute;
-}
 
 .textfields {
   background-color: white;

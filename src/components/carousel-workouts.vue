@@ -28,40 +28,7 @@
       </template>
       <v-carousel-item v-for="card in items.content" :key="card.id"
       transition="fade-transition">
-        <v-card class="mx-auto my-12 workoutCardOutline"
-                width="600"
-                style="font-family:Inter2"
-        >
-          <template slot="progress">
-            <v-progress-linear
-                color="#204dee"
-                height="10"
-                indeterminate/>
-          </template>
-
-          <v-img max-height="250" :src="card.metadata" alt="txt kkita"/>
-
-          <v-card-title style="padding-left: 20px">{{ card.name }}
-            <v-spacer/>
-            <v-icon>mdi-arrow-up-bold-circle</v-icon>
-            {{ card.score }}
-          </v-card-title>
-
-          <v-card-text style="padding-left: 30px">
-            <v-row align="center"
-                   class="mx-0">
-              <div class="black--text my-4 text-subtitle-1">
-                {{ card.category.name }}
-              </div>
-            </v-row>
-          </v-card-text>
-            <v-btn
-                class="blue darken-3  white--text"
-                style="margin: 20px"
-            >
-              See Workout
-            </v-btn>
-        </v-card>
+        <workout-element :routine="card"/>
       </v-carousel-item>
     </v-carousel>
   </v-container>
@@ -70,9 +37,11 @@
 <script>
 import {mapState} from "pinia";
 import {useRoutineStore} from "@/store/RoutineStore";
+import WorkoutElement from "@/components/workout-element";
 
 export default {
   name: "carousel-workouts",
+  components: {WorkoutElement},
   data (){
     return {
       items: []

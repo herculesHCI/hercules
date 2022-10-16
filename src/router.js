@@ -6,17 +6,13 @@ import SignUp from "@/views/SignUp";
 import WorkoutsPage from "@/views/Workouts-Page";
 import WorkoutsDetail from "@/views/Workouts-Detail";
 import MyProfile from "@/views/MyProfile";
-import Settings from "@/views/Settings-view";
+import main from "@/components/main-comp";
+import accessDenied from "@/views/accessDenied";
 
 //require('vue-router').default;
 Vue.use(VueRouter);
 
 const routes = [
-    {
-        path: "/home",
-        name: "Home-Landing",
-        component: Home
-    },
     {
         path: "/",
         name: "Login",
@@ -28,25 +24,35 @@ const routes = [
         component: SignUp
     },
     {
-        path: "/WorkoutsPage",
-        name: "WorkoutsPage",
-        component: WorkoutsPage
+        path:"/accessDenied",
+        name:"accessDenied",
+        component: accessDenied
     },
     {
-        path: "/WorkoutsDetail",
-        name: "WorkoutsDetail",
-        component: WorkoutsDetail
-    },
-    {
-        path: "/MyProfile",
-        name: "My Profile",
-        component: MyProfile
-    },
-    {
-        path: "/Settings",
-        name: "Settings",
-        component: Settings
-    }
+        path:'/main',
+        name:'main',
+        component:main,
+        children:[
+            {
+                path: "home",
+                name: "Home-Landing",
+                component: Home
+            },    {
+                path: "WorkoutsPage",
+                name: "WorkoutsPage",
+                component: WorkoutsPage
+            },
+            {
+                path: "WorkoutsDetail",
+                name: "WorkoutsDetail",
+                component: WorkoutsDetail
+            },
+            {
+                path: "MyProfile",
+                name: "My Profile",
+                component: MyProfile,
+            }]},
+
 ];
 
 const router = new VueRouter({
