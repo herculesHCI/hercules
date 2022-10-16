@@ -44,7 +44,6 @@
 import workoutElement from "@/components/workout-element"
 import {useSecurityStore} from "@/store/SecurityStore";
 import {useRoutineStore} from "@/store/RoutineStore";
-import router from "@/router";
 export default{
   data(){
     return {
@@ -59,10 +58,6 @@ export default{
     const routineStore = useRoutineStore();
     await securityStore.initialize();
     const user =  await securityStore.getCurrentUser();
-    if(user === null){
-      await router.push("accessDenied");
-      return;
-    }
     this.userWorkouts = await routineStore.getUserRoutines(user.username);
     if(Array.isArray(this.userWorkouts) && this.userWorkouts.length === 0){
       this.emptyFlag=true;

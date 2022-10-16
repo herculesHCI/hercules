@@ -48,10 +48,6 @@ class RoutinesApi{
     static async getCycles(routineId,controller) {
         return await Api.get(`${RoutinesApi.getUrl()}/${routineId}/cycles`, true, controller);
     }
-
-    static async getUserRoutines(){
-        return await Api.get(`${RoutinesApi.getUrl()}?page=0&size=20&orderBy=date&direction=asc`,true,"");
-    }
 }
 
 class Routine{
