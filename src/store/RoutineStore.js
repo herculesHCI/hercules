@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {RoutinesApi} from "@/api/routines";
 import {ReviewsApi} from "@/api/review";
+import {CategoriesApi} from "@/api/categories"
 import filterTypes from "@/api/filter";
 
 export const useRoutineStore = defineStore("routine", {
@@ -69,15 +70,12 @@ export const useRoutineStore = defineStore("routine", {
             filter.filterActualName="";
             const routines = await RoutinesApi.getAll(1,"date",20,"desc",filter,"","");
             const result=[];
-            console.log(routines);
-            console.log(username);
             for(let i=0,j=0; i < routines.totalCount;i++){
                 if(routines.content[i].user.username === username){
                     result[j] = routines.content[i];
                     j++;
                 }
             }
-            console.log(result);
             return result;
         },
         async addCycle(routineID,cycle){
@@ -91,6 +89,9 @@ export const useRoutineStore = defineStore("routine", {
         },
         async deleteCycle(routineID, cycleID){
             return await RoutinesApi.deleteCycle(routineID,cycleID);
+        },
+        async createCategory(category){
+            return await CategoriesApi.add(category);
         }
     },
 });
