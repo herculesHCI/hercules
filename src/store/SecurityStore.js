@@ -53,8 +53,12 @@ export const useSecurityStore = defineStore("security", {
             const result = await UserApi.get();
             this.setUser(result);
         },
-        loggedIn(){
-            //return this.isLoggedIn();
+        async createUser(credentials){
+             const result=await UserApi.addUser(credentials);
+             this.setUser(result.user)
         },
+        async verifyEmail(email,code){
+            await UserApi.verifyEmail(email,code)
+        }
     },
 });

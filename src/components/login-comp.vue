@@ -23,10 +23,11 @@
              class="btn black white--text"
              width="150px"
              style="font-family: 'Dalek Pinpoint'"
-             @click="login()"
+             @click="login"
       >Log In
       </v-btn>
     </div>
+    <div v-show="error"><p style="font-family: Inter;color: red">{{errmsg}}</p></div>
     <v-row align="center">
       <v-divider></v-divider>
       OR
@@ -37,6 +38,7 @@
              width="150px"
              class="btn white 10px black--text"
              style="font-family: 'Dalek Pinpoint'"
+             @click="goToSignUp"
       >Sign Up
       </v-btn>
     </div>
@@ -47,6 +49,8 @@
 import {mapState, mapActions} from "pinia"
 import {useSecurityStore} from "@/store/SecurityStore";
 import {Credentials} from "@/api/user";
+import router from "@/router";
+
 
 export default {
   name: "login-comp",
@@ -54,7 +58,9 @@ export default {
     return {
       username: '',
       password: '',
+      errmsg: '',
       show1: false,
+      error: false
     }
   },
 
@@ -68,33 +74,28 @@ export default {
   },
   methods: {
     ...mapActions(useSecurityStore, {
-      $getCurrentUser: 'getCurrentUser',
       $login: 'login',
-      $logout: 'logout',
     }),
-    setResult(result){
-      this.result = JSON.stringify(result, null, 2)
-    },
-    clearResult() {
-      this.result = null
-    },
     async login() {
-      try {
-        const credentials = new Credentials('bot3', '1234567890')
-        await this.$login(credentials, true)
-        this.clearResult()
-      } catch (e) {
-        this.setResult(e)
+      if (this.username != '' && this.password != '') {
+        try {
+          const credentials = new Credentials(this.username, this.password)
+          await this.$login(credentials, false)
+        } catch (e){
+          this.errmsg = 'Couldn\'t find user or password is incorrect'
+          this.error = true
+        }
+        if (this.$isLoggedIn)
+          await router.push('home')
+      } else {
+        this.errmsg = 'There are empty fields'
+        this.error = true
       }
     },
-    async logout() {
-      await this.$logout()
-      this.clearResult()
+    async goToSignUp() {
+      await router.push('signup')
     },
-    async getCurrentUser() {
-      await this.$getCurrentUser()
-      this.setResult(this.$user)
-    },
+
   },
   async created() {
     const securityStore = useSecurityStore();
@@ -126,13 +127,5 @@ export default {
   margin: 15px;
 }
 
-@font-face {
-  font-family: "Dalek Pinpoint";
-  src: local("DalekPinpointBold"), url(@/fonts/DalekPinpointBold.ttf) format("truetype");
-}
 
-@font-face {
-  font-family: "AbhayaLibre-ExtraBold";
-  src: local("AbhayaLibre-ExtraBold"), url(@/fonts/AbhayaLibre-ExtraBold.ttf) format("truetype");
-}
 </style>

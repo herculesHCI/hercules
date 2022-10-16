@@ -1,7 +1,7 @@
 export { Api }
 
 class Api {
-    static token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjksImlhdCI6MTY2NTc3NzU4OTE3OSwiZXhwIjoxNjY1NzgwMTgxMTc5fQ.fRcuQ1UBP4cbT3unjFWkLDMuBe3OvvrwAB19OKAV8gw";
+    static token;
 
     static get baseUrl() {
         return "http://localhost:8080/api" // "http://127.0.0.1.8080/api"
@@ -11,7 +11,7 @@ class Api {
         return 60 * 1000;
     }
 
-    static async myFetch(url, secure, init={} ){
+    static async myFetch(url, secure, init){
         if(secure && Api.token){
             if(!init.headers){
                 init.headers= {};
@@ -48,7 +48,7 @@ class Api {
     }
 
     static async get(url, secure){
-        return await Api.myFetch(url, secure, {} );
+        return await Api.myFetch(url, secure,{});
     }
 
     static async post(url,secure,data){

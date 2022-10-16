@@ -7,8 +7,8 @@ export const useRoutineStore = defineStore("routine", {
     state: () => ({ items: [] }),
     getters: {
         findIndex() {
-            return (routineId) => {
-                return this.items.findIndex(item => item.id === routineId)
+            return (routine) => {
+                return this.items.findIndex(item => item.id === routine.id)
             }
         },
     },
@@ -44,12 +44,12 @@ export const useRoutineStore = defineStore("routine", {
             if (index >= 0)
                 this.splice(index);
         },
-        async get(routineId) {
-            const index = this.findIndex(routineId);
+        async get(routine) {
+            const index = this.findIndex(routine);
             if (index >= 0)
                 return this.items[index];
 
-            const result = await RoutinesApi.get(routineId);
+            const result = await RoutinesApi.get(routine);
             this.push(result);
             return result;
         },
@@ -79,6 +79,18 @@ export const useRoutineStore = defineStore("routine", {
             }
             console.log(result);
             return result;
+        },
+        async addCycle(routineID,cycle){
+            return await RoutinesApi.addCycle(routineID, cycle);
+        },
+        async getCycle(RoutineID){
+            return await RoutinesApi.getCycles(RoutineID);
+        },
+        async editCycle(routineID, cycleID, cycle){
+            return await RoutinesApi.modify(routineID, cycleID, cycle);
+        },
+        async deleteCycle(routineID, cycleID){
+            return await RoutinesApi.deleteCycle(routineID,cycleID);
         }
     },
 });

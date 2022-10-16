@@ -1,7 +1,7 @@
 import { defineStore } from "pinia"
 import { CyclesExercisesApi } from "@/api/cyclesExercise";
 
-export const userCyclesExerciseStore = defineStore( "cyclesExercise", {
+export const useCyclesExerciseStore = defineStore( "cyclesExercise", {
     state: () => ({
         items:[],
     }),
@@ -26,11 +26,7 @@ export const userCyclesExerciseStore = defineStore( "cyclesExercise", {
             this.items = cyclesExercise;
         },
         async add(cycleID, exerciseID, exercise){
-            const result = await CyclesExercisesApi.addCycleExercise(cycleID, exerciseID, exercise);
-            if(!this.findIndex(result)){
-                this.push(result);
-            }
-            return result;
+            return await CyclesExercisesApi.addCycleExercise(cycleID, exerciseID, exercise);
         },
         async get(cycleID){
             return await CyclesExercisesApi.getCycleExercises(cycleID);
