@@ -41,7 +41,6 @@ export const useSecurityStore = defineStore("security", {
         async login(credentials, rememberMe) {
             const result = await UserApi.login(credentials);
             this.updateToken(result.token, rememberMe);
-            console.log(result.token)
         },
         async logout() {
             await UserApi.logout();
@@ -53,6 +52,9 @@ export const useSecurityStore = defineStore("security", {
 
             const result = await UserApi.get();
             this.setUser(result);
-        }
+        },
+        loggedIn(){
+            //return this.isLoggedIn();
+        },
     },
 });

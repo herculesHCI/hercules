@@ -7,8 +7,8 @@ export const useRoutineStore = defineStore("routine", {
     state: () => ({ items: [] }),
     getters: {
         findIndex() {
-            return (routine) => {
-                return this.items.findIndex(item => item.id === routine.id)
+            return (routineId) => {
+                return this.items.findIndex(item => item.id === routineId)
             }
         },
     },
@@ -44,12 +44,12 @@ export const useRoutineStore = defineStore("routine", {
             if (index >= 0)
                 this.splice(index);
         },
-        async get(routine) {
-            const index = this.findIndex(routine);
+        async get(routineId) {
+            const index = this.findIndex(routineId);
             if (index >= 0)
                 return this.items[index];
 
-            const result = await RoutinesApi.get(routine);
+            const result = await RoutinesApi.get(routineId);
             this.push(result);
             return result;
         },
@@ -63,6 +63,22 @@ export const useRoutineStore = defineStore("routine", {
         },
         async rateWorkout(routineId,rating){
             return await ReviewsApi.addReview(routineId,rating,"");
+        },
+        async getUserRoutines(username){
+            const filter = filterTypes;
+            filter.filterActualName="";
+            const routines = await RoutinesApi.getAll(1,"date",20,"desc",filter,"","");
+            const result=[];
+            console.log(routines);
+            console.log(username);
+            for(let i=0,j=0; i < routines.totalCount;i++){
+                if(routines.content[i].user.username === username){
+                    result[j] = routines.content[i];
+                    j++;
+                }
+            }
+            console.log(result);
+            return result;
         }
     },
 });

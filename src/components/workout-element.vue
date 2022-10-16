@@ -1,34 +1,64 @@
 <template>
   <v-container>
-    <div class="workout-element">
-      <img alt="workout-image" src="../assets/flexiones.png" class="workout-element-image"
-           width="610" height="250" style="object-fit: cover;">
-      <div class="workout-element-text">
-        <p>3 x Bench Press<p/>
-        <p>3 x Lateral Raise<p/>
-        <p>3 x Incline Bench Press<p/>
-        <p>3 x Arnold Press<p/>
-        <p>2 x Triceps Pushdowns<p/>
-      </div>
-      <div class="workout-element-icon" >
-        <v-icon
-            color="#F0BE0E" size=42px
-            style="display: flex ; justify-content: right; height: 0; padding: 25px 20px; " >
-          mdi-star
-        </v-icon>
+    <v-card class="mx-auto my-12 workoutCardOutline"
+            width="1000"
+            style="font-family:Inter2"
+    >
+      <template slot="progress">
+        <v-progress-linear
+            color="#204dee"
+            height="10"
+            indeterminate/>
+      </template>
 
-        <v-icon
-            color="#204dee" size=62px style=" padding-top: 100px; padding-right: 25px" >
-          mdi-play-circle
-        </v-icon>
-      </div>
-    </div>
+      <v-img max-height="250" :src="workout.metadata" alt="txt kkita"/>
+
+      <v-card-title style="padding-left: 20px">{{ workout.name }}
+        <v-spacer/>
+        <v-icon>mdi-arrow-up-bold-circle</v-icon>
+        {{ workout.score }}
+      </v-card-title>
+
+      <v-card-text style="padding-left: 30px">
+        <v-row align="center"
+               class="mx-0">
+          <div class="black--text my-4 text-subtitle-1">
+            {{ workout.category.name }}
+          </div>
+        </v-row>
+      </v-card-text>
+      <v-btn
+          class="blue darken-3  white--text"
+          style="margin: 20px"
+      >
+        See Workout
+      </v-btn>
+    </v-card>
   </v-container>
 </template>
 
 <script>
+import {mapState} from "pinia";
+import {useRoutineStore} from "@/store/RoutineStore";
+
 export default {
-  name: "workout-element"
+  name: "workout-element",
+  data(){
+    return{
+      workout:{}
+    }
+  },
+  props:{
+    routine:Object,
+  },
+  computed: {
+    ...mapState(useRoutineStore, {
+      $user: state => state.user,
+    }),
+  },
+  async created() {
+    this.workout = this.routine;
+  }
 }
 </script>
 

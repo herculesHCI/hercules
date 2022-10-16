@@ -15,12 +15,22 @@
         </v-icon>
       </div>
 
-      <div class="workouts-container">
-        <workout-element></workout-element>
-        <workout-element></workout-element>
-        <workout-element></workout-element>
-        <workout-element></workout-element>
-      </div>
+      <v-container >
+        <v-row align="center" v-show="!emptyFlag">
+          <div>
+            <v-col v-for="item in userWorkouts" :key="item.id">
+              <workout-element :routine="item"/>
+            </v-col>
+          </div>
+        </v-row>
+        <v-row v-show="emptyFlag">
+          <div>
+            <h2>You don't have any routines...</h2>
+          </div>
+        </v-row>
+      </v-container>
+
+
 
     </div>
   </div>
@@ -28,9 +38,30 @@
 
 <script>
 import workoutElement from "@/components/workout-element"
+import {useSecurityStore} from "@/store/SecurityStore";
+import {useRoutineStore} from "@/store/RoutineStore";
 export default{
+  data(){
+    return {
+      userWorkouts:[],
+      emptyFlag:false
+  }},
   components:{
     workoutElement
+  },
+  async created(){
+    const securityStore = useSecurityStore();
+    const routineStore = useRoutineStore();
+    await securityStore.initialize();
+    // if(!securityStore.loggedIn()){
+    //   //No le tengo que dejar acceso o sea tengo que hacer un
+    //   //rounter.push("accessDenied")
+    //   return;
+    // }
+    this.userWorkouts = await routineStore.getUserRoutines( "bot3");
+    if(Array.isArray(this.userWorkouts) && this.userWorkouts.length === 0){
+      this.emptyFlag=true;
+    }
   }
 }
 </script>
