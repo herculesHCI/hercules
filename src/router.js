@@ -8,7 +8,9 @@ import WorkoutsDetail from "@/views/Workouts-Detail";
 import MyProfile from "@/views/MyProfile";
 import main from "@/components/main-comp";
 import accessDenied from "@/views/accessDenied";
-
+import visualizeExcercises from "@/views/visualizeExcercises";
+import modifyExercise from "@/views/modifyExercise";
+import createNewExercise from "@/views/createNewExercise";
 //require('vue-router').default;
 Vue.use(VueRouter);
 
@@ -51,7 +53,24 @@ const routes = [
                 path: "MyProfile",
                 name: "My Profile",
                 component: MyProfile,
-            }]},
+            },
+            {
+                path: "visualizeExercises",
+                name: "visualizeExercises",
+                component: visualizeExcercises
+            },
+            {
+                path: "modifyExercise",
+                name: "modifyExercise",
+                component: modifyExercise
+            },
+            {
+                path: "createNewExercise",
+                name: "createNewExercise",
+                component: createNewExercise
+            }
+
+        ]},
 
 ];
 
