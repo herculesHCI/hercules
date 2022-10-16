@@ -70,7 +70,6 @@ export const useRoutineStore = defineStore("routine", {
             filter.filterActualName="";
             const routines = await RoutinesApi.getAll(1,"date",20,"desc",filter,"","");
             const result=[];
-            console.log(routines);
             for(let i=0,j=0; i < routines.content.length;i++){
                 if(routines.content[i].user.username === username){
                     result[j] = routines.content[i];
