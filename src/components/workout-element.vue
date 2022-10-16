@@ -11,7 +11,7 @@
             indeterminate/>
       </template>
 
-      <v-img max-height="250" :src="workout.metadata" alt="txt kkita"/>
+      <v-img max-height="250" :src="workout.metadata" alt="Image not fount :/"/>
 
       <v-card-title style="padding-left: 20px">{{ workout.name }}
         <v-spacer/>
