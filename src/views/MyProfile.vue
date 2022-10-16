@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import ProfilePreview from "@/components/profilePreview";
-import ProfileMyData from "@/components/profileMyData";
+import ProfilePreview from "@/components/profile-preview";
+import ProfileMyData from "@/components/profile-my-data";
 
 export default {
   name: " MyProfile",
