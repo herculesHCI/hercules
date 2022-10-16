@@ -21,7 +21,7 @@
         </router-link>
         <v-spacer></v-spacer>
         <v-row align-content="center"
-               justify="right">
+               >
           <v-text-field append-icon="mdi-magnify"
                         placeholder="Search Workouts"
                         outlined
