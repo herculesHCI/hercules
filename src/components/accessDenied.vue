@@ -1,7 +1,7 @@
 <template>
   <div class="accessDenied-page">
     <h1>Oops..</h1>
-    <h2>No tiene los permisos requeridos para visualizar esta pagina</h2>
+    <h2>Seems like you aren't allowed in here</h2>
     <h1>⛔</h1>
   </div>
 </template>
