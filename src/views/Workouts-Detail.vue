@@ -111,12 +111,16 @@ export default{
 
     }
   },
+  props:{
+    routineIDReceived : Number,
+  },
   async created(){
     await this.initialize();
 
   },
   methods: {
     async initialize(){
+      this.routineID = this.routineIDReceived;
       let aux;
       this.routine = (await this.$getRoutine(this.routineID)).content[0];
       aux = await this.$getCycle(this.routineID);
