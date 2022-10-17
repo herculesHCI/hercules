@@ -135,6 +135,7 @@ export default{
   },
   methods: {
     async initialize(){
+      console.log(this.routineId2);
       this.routineID = this.routineId2;
       let aux;
       this.routine = (await this.$getRoutine(this.routineID));

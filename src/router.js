@@ -50,7 +50,7 @@ const routes = [
                 path: "WorkoutsDetail",
                 name: "WorkoutsDetail",
                 component: WorkoutsDetail,
-                props: { routineId:0 }
+                props: true
             },{
                 path:"WorkoutsCreate",
                 name:"WorkoutsCreate",

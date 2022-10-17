@@ -27,14 +27,13 @@
           </div>
         </v-row>
       </v-card-text>
-      <router-link to="/main/WorkoutsDetail" :routineId="workout.id">
-        <v-btn
-            class="blue darken-3  white--text"
-            style="margin: 20px"
-        >
-          See Workout
-        </v-btn>
-      </router-link>
+      <v-btn
+          class="blue darken-3  white--text"
+          style="margin: 20px"
+          @click="goToRoutine()"
+      >
+        See Workout
+      </v-btn>
     </v-card>
   </v-container>
 </template>
@@ -60,6 +59,16 @@ export default {
   },
   async created() {
     this.workout = this.routine;
+  },
+  methods:{
+    goToRoutine(){
+      this.$router.push({
+        name:"WorkoutsDetail",
+        params:{
+          routineId2 : this.workout.id
+        }
+      })
+    }
   }
 }
 </script>
