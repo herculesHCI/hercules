@@ -62,6 +62,11 @@ export const useRoutineStore = defineStore("routine", {
             filter.filterActualName="";
             return await RoutinesApi.getAll(1,"score",4,"desc","",filter,"","");
         },
+        async mostRecent(){
+            const filter = filterTypes;
+            filter.filterActualName="";
+            return await RoutinesApi.getAll(1,"date",30,"desc","",filter,"","");
+        },
         async rateWorkout(routineId,rating){
             return await ReviewsApi.addReview(routineId,rating,"");
         },

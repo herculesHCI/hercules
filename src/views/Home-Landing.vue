@@ -4,7 +4,7 @@
     <div>
       <carousel-workouts/>
     </div>
-    <h1 style="font-family: Inter2">Categories</h1>
+    <h1 class="font-weight-medium" style="font-family: Inter2">Most Recent Workouts Created</h1>
     <div>
       <grid-category/>
     </div>
