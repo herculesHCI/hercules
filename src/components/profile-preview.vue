@@ -6,6 +6,9 @@
         <v-avatar size="280px">
           <v-img :src="profilePic"></v-img>
         </v-avatar>
+        <v-btn icon color="#204DEE" class="pencilbtn" t>
+          <v-icon size="80" @click="sendToModify">mdi-pencil-circle</v-icon>
+        </v-btn>
       </v-card>
     </div>
     <div>
@@ -35,6 +38,11 @@ export default {
       $user: state => state.user,
     }),
   },
+  methods:{
+    sendToModify(){
+      this.$router.push('modifyMyProfile')
+    }
+  },
   async created() {
     const securityStore = useSecurityStore();
     await securityStore.initialize();
@@ -61,6 +69,12 @@ export default {
   color: black;
   flex-wrap: wrap;
   margin: 20px auto;
+}
+
+.pencilbtn {
+  margin-top: 200px;
+  margin-right: 100px;
+  position: absolute;
 }
 
 </style>

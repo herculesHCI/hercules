@@ -80,6 +80,7 @@
       > Verify email
       </v-btn>
     </div>
+    <p v-show="wait" style="font-family: Inter">Please wait while we verify...</p>
     <div v-show="error">
       <p style="font-family: Inter;color: red">{{ errormsg }}</p>
     </div>
@@ -123,6 +124,7 @@ export default {
       code:'',
       errormsg: '',
       error: false,
+      wait:false,
       rules: {
         samePassword: (value) => (this.password === value) || 'Passwords dont match'
       }
@@ -141,15 +143,19 @@ export default {
     async signUp() {
       if (this.username === '' || this.email === '' || this.password === '' || this.password2 == '' || this.avatar == '' || this.frase === '' || this.age === '' || this.weight === '' || this.height === '') {
         this.errormsg = "There are empty fields";
+        this.wait=false;
         this.error = true;
       } else {
         try {
           const metadata={age:this.age,frase:this.frase,weight:this.weight,height:this.height}
           const credentials = new createdCredentials(this.username, this.password, this.email, this.avatar, metadata);
+          this.wait=true
           await this.$createUser(credentials);
+          this.wait=false
           this.error=false
           this.sentCode=true
         } catch (e){
+          this.wait=false
           this.errormsg = 'Error signing up, check information provided'
           this.error = true
         }
