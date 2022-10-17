@@ -167,7 +167,7 @@ export default {
         alert("There seems to be an error with the Workout creation");
       }
       this.resetForm();
-      await router.push(`/editRoutine/${routine.id}`);
+      await router.go(-1);
     },
     findId(catName){
       for(let i=0;i < this.CategoriesId.length;i++){
