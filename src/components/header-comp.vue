@@ -23,12 +23,7 @@
         <v-spacer></v-spacer>
         <v-row align-content="center"
                justify="right">
-          <v-text-field append-icon="mdi-magnify"
-                        placeholder="Search Workouts"
-                        outlined
-                        rounded
-                        color="black"
-                        class="align-searchbar"/>
+          <v-spacer></v-spacer>
           <router-link :to="{
             name:myProfileLink.name,
             params:{slug:myProfileLink.route}
