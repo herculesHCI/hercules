@@ -7,6 +7,8 @@
           <v-card-title>{{ item.name }}</v-card-title>
           <v-card-text style="color: black">{{ item.detail }}</v-card-text>
           <v-btn style="margin-bottom: 10px" color="blue white--text" @click="sendToModify(item)">Edit</v-btn>
+          <v-btn style="margin-bottom: 10px;margin-left: 10px" color="red white--text" @click="deleteItem(item)">Delete
+          </v-btn>
         </v-card>
       </v-col>
     </v-row>
@@ -15,7 +17,7 @@
 </template>
 
 <script>
-import {mapState} from "pinia";
+import {mapActions, mapState} from "pinia";
 import {useExerciseStore} from "@/store/ExerciseStore";
 
 export default {
@@ -30,19 +32,27 @@ export default {
       $items: state => state.items,
     }),
   },
-  methods:{
-    sendToModify(item){
-      this.$router.push({name:'modifyExercise',params:{item:item}})
+  methods: {
+    ...mapActions(useExerciseStore, {
+      $delete: 'delete',
+    }),
+    sendToModify(item) {
+      this.$router.push({name: 'modifyExercise', params: {item: item}})
     },
-    sendToCreate(){
+    sendToCreate() {
       this.$router.push('createNewExercise')
+    },
+    async deleteItem(item){
+      await this.$delete(item.id)
+      await this.$router.push('home')
     }
-  },
-  async created() {
-    const exerciseStore = useExerciseStore();
-    this.items = await exerciseStore.getAll();
+
+    },
+    async created() {
+      const exerciseStore = useExerciseStore();
+      this.items = await exerciseStore.getAll();
+    }
   }
-}
 </script>
 
 <style scoped>
