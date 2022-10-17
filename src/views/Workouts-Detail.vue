@@ -126,6 +126,7 @@ export default{
 
     }
   },
+
   async created(){
     await this.initialize();
 
@@ -270,11 +271,13 @@ export default{
         this.editCycle.exercise = aux;
         await this.$addCycleExercise(this.cycleRoutineid, this.editCycle.exercise.id, this.editCycle);
         this.editCycle = aux;
+        this.exerciseListToggle=false;
       }
       this.refresh();
     },
     async removeExerciseFromRoutine(){
       await this.$removeCycleExercise(this.cycleRoutineid,this.editExercise.id);
+      this.refresh();
     },
     async addExerciseToRoutine(exercise){
       const aux = await this.$getCycleExercise(this.editCycle.id);
@@ -291,6 +294,7 @@ export default{
         exercise : aux ,
       }
       await this.$addCycleExercise(this.editCycle.id, exercise.id, toSend );
+      this.refresh();
     },
     async addRoutineSection(){
       const cont = await this.$getCycle(this.routine.id);
