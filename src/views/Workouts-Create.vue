@@ -160,7 +160,6 @@ export default {
   methods:{
     async createRoutine(){
       const id = this.findId(this.form.category);
-      console.log(this.form);
       const routine = new Routine(this.form.name, {id},this.form.imageUrl);
       try{
         await this.rStore.create(routine);
