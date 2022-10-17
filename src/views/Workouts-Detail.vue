@@ -1,27 +1,22 @@
 <template>
-  <div class="Workouts-Details-out">
-    <div class="Workouts-Details" id="Workouts-Details" align="center">
 
-      <v-icon color="#00000" size="52px" left style="margin-bottom: 25px; float: left">
-        mdi-arrow-left
-      </v-icon>
+  <div class="Workouts-Details-out">
+    <v-icon @click="back()" color="#00000" size="52px" left style="margin-bottom: 25px; margin-top:25px; margin-left:25px">
+      mdi-arrow-left
+    </v-icon>
+    <div class="Workouts-Details" id="Workouts-Details" align="center" >
+
 
       <div class="Individual-Workout-Details" >
-        <v-img alt="workout-details-image" :src="routine.metadata" class="workout-element-image"/>
+        <v-img   :src="routine.metadata"  class="workout-element-image"/>
 
 
 
-        <v-container v-for="x in routineCycle" :key="x.cycleRoutine.id" class="routine-cycles" >
-          <div style="display:grid; grid-auto-columns: auto  " >
-            <h1 style="font-family: Inter2; ">{{x.cycleRoutine.name}} </h1>
-            <v-icon @click="editRoutinSectionToggle()">mdi-pencil</v-icon>
-          </div>
-          <div v-if="editRoutineSection" class="workouts-edit" >
-            <p >New Name:</p>
-            <v-text-field class="input" v-model="editRoutineSectionName"></v-text-field>
+        <v-container v-for="x in routineCycle" :key="x.cycleRoutine.id" class="routine-cycles" style="padding-bottom: 40px">
+            <v-text-field class="input" v-model="editRoutineSectionName" :label="x.cycleRoutine.name" style="width: 200px"></v-text-field>
             <v-btn @click="changeNameSection(x.cycleRoutine)">Save Name</v-btn>
-            <v-btn @click="deleteSection(x.cycleRoutine)">Delete Section</v-btn>
-          </div>
+            <v-btn @click="deleteSection(x.cycleRoutine)" style="color: red">Delete Section</v-btn>
+
           <div class="workout-details-exercises">
 
 
@@ -30,21 +25,22 @@
               <div class="excercise-detail-top">
                 <v-column>
                   <p style="float: left" >{{y.exercise.name}}</p>
-                  <v-btn icon @click="editButton(y.exercise, y, x.cycleRoutine.id)" style="float:right; padding-right: 30px"><v-icon size=36px style="color:#000000;"> mdi-pencil-box </v-icon></v-btn>
+                  <v-btn icon @click="editButton(y.exercise, y, x.cycleRoutine.id)" style="float:right; padding-right: 30px">
+                    <v-icon size=36px style="color:#204DEE;" > mdi-pencil-box </v-icon>
+                  </v-btn>
                 </v-column>
               </div>
               <div class="excercise-detail-header">
-                <p>Set </p>
+                <p></p>
                 <p>Duration</p>
                 <p> </p>
               </div>
 
-              <div>
+              <div v-for="index in  y.repetitions " :key="index">
                 <div class="excercise-detail-content">
-                  <p>1</p>
+                  <p>{{ index }}</p>
                   <p>{{ y.duration }}</p>
-                  <v-btn icon style="margin-left: 20px">
-                    <v-icon size=32px >mdi-checkbox-marked</v-icon></v-btn>
+
                 </div>
 
               </div>
@@ -56,32 +52,46 @@
         <v-btn @click="addRoutineSection()">Add Routine Section</v-btn>
 
 
-        <v-list v-if="this.exerciseChange">
-          <v-subheader>EXERCISES</v-subheader>
-          <v-list-item v-for="exercise in exerciseList" :key="exercise.id" @click="changeExercise(exercise)">{{exercise.name}}</v-list-item>
-        </v-list>
+
 
 
       </div>
-      <v-overlay v-if="editBtn" class="workouts-edit" >
-        <v-icon @click="closeEditWithoutSave()">mdi-close</v-icon>
-        <h1>{{editExercise.name}}</h1>
-        <v-icon @click="exerciseListToggle()">mdi-arrow-down-drop-circle-outline</v-icon>
-        <p>Duration</p>
-        <p>{{currentDurationAmount}}</p>
-        <v-icon @click="editDuration(1)">mdi-plus-circle-outline</v-icon>
-        <v-icon @click="editDuration(-1)">mdi-minus-circle-outline</v-icon>
-        <p>Amount of Series</p>
-        <p>{{currentSeriesAmount}}</p>
-        <v-icon @click="editSeriesAmount(1)">mdi-plus-circle-outline</v-icon>
-        <v-icon @click="editSeriesAmount(-1)">mdi-minus-circle-outline</v-icon>
-        <v-btn @click="closeEditWithSave()">Save Changes</v-btn>
-        <v-btn @click="removeExerciseFromRoutine()">Remove</v-btn>
+
+      <v-overlay v-if="this.exerciseChange" class="list-exercises">
+      <v-list  >
+        <v-subheader>EXERCISES</v-subheader>
+        <v-list-item v-for="exercise in exerciseList" :key="exercise.id" @click="changeExercise(exercise)">{{exercise.name}}</v-list-item>
+        <v-list-item style="color : red ;" @click="exerciseListToggle()">Cancel</v-list-item>
+      </v-list>
       </v-overlay>
 
+      <v-overlay v-if="editBtn" class="workouts-edit" >
+        <v-icon @click="closeEditWithoutSave()" style="float:right">mdi-close</v-icon>
+        <div style="">
+          <h1>{{editExercise.name}}</h1>
+          <v-icon @click="exerciseListToggle()">mdi-arrow-down-drop-circle-outline</v-icon>
+        </div>
+        <p style="padding-top: 40px">Duration</p>
+        <p>{{currentDurationAmount}}</p>
+        <div>
+        <v-icon @click="editDuration(1)">mdi-plus-circle-outline</v-icon>
+        <v-icon @click="editDuration(-1)">mdi-minus-circle-outline</v-icon>
+        </div>
+        <p style="padding-top: 40px">Amount of Series</p>
+        <p>{{currentSeriesAmount}}</p>
+        <div>
+        <v-icon @click="editSeriesAmount(1)">mdi-plus-circle-outline</v-icon>
+        <v-icon @click="editSeriesAmount(-1)">mdi-minus-circle-outline</v-icon>
+        </div><div style="padding-top: 40px">
+          <v-btn @click="closeEditWithSave()">Save Changes</v-btn>
+          <v-btn @click="removeExerciseFromRoutine()" style="color:red">Remove</v-btn>
+        </div>
+      </v-overlay>
     </div>
   </div>
 </template>
+
+
 
 <script>
 import {mapActions} from "pinia";
@@ -90,9 +100,13 @@ import {useRoutineStore} from "@/store/RoutineStore";
 import {Exercise} from "@/api/exercises";
 import {Cycle} from '@/backend/workouts-details-back.mjs'
 import {useCyclesExerciseStore} from "@/store/CyclesExercisesStore";
+import router from "@/router";
 
 
 export default{
+  components:{
+
+  },
   data() {
     return{
       routineID : 1,
@@ -106,13 +120,11 @@ export default{
       cycleRoutineid: null,
       exerciseChange: false,
       exerciseList: null,
-      editRoutineSection: false,
+      editRoutineSection: [],
       editRoutineSectionName: null,
+      image: null,
 
     }
-  },
-  props:{
-    routineIDReceived : Number,
   },
   async created(){
     await this.initialize();
@@ -120,9 +132,8 @@ export default{
   },
   methods: {
     async initialize(){
-      this.routineID = this.routineIDReceived;
       let aux;
-      this.routine = (await this.$getRoutine(this.routineID)).content[0];
+      this.routine = (await this.$getRoutine(this.routineID));
       aux = await this.$getCycle(this.routineID);
       for( let i=0 ; i < aux.totalCount ; i++ ){
         this.routineCycle.push( new Cycle(aux.content[i]) ) ;
@@ -132,6 +143,9 @@ export default{
         }
       }
       this.exerciseList = (await this.$getAllExercises()).content;
+      if(this.routine.metadata === null ){
+        this.image = '@/assets/HerculesNegro.png';
+      }
     },
     ...mapActions(useExerciseStore, {
       $getAllExercises: 'getAll',
@@ -257,6 +271,7 @@ export default{
         await this.$addCycleExercise(this.cycleRoutineid, this.editCycle.exercise.id, this.editCycle);
         this.editCycle = aux;
       }
+      this.refresh();
     },
     async removeExerciseFromRoutine(){
       await this.$removeCycleExercise(this.cycleRoutineid,this.editExercise.id);
@@ -294,13 +309,7 @@ export default{
         "metadata": null
       }
       await this.$addCycle(this.routineID,aux);
-    },
-    editRoutinSectionToggle(){
-      if (this.editRoutineSection) {
-        this.editRoutineSection = false;
-      } else {
-        this.editRoutineSection = true;
-      }
+      this.refresh();
     },
     async changeNameSection(cycle){
       const aux= await this.$getCycle(this.routineID);
@@ -309,9 +318,18 @@ export default{
       await this.$editCycle(this.routineID, cycle.id ,toSend)
     },
     async deleteSection(cycle){
-      await this.$removeCycle(this.routineID, cycle.id)
-    }
+      await this.$removeCycle(this.routineID, cycle.id);
+      this.refresh();
+    },
+    back(){
+      router.push('home')
+    },
+    refresh(){
+      window.location.reload();
+    },
+
   }
+
 
 }
 
@@ -353,9 +371,6 @@ export default{
 }
 
 
-.v-icon{
-  cursor:pointer;
-}
 
 .excercise-workout-detail{
   width: 400px;
@@ -370,10 +385,8 @@ export default{
 }
 
 .excercise-detail-header{
-  display: grid;
-  gap: 1px;
-  grid-template-columns: 0px 200px 100px;
-  padding-left: 20px;
+
+  margin-left: -30px;
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 17px;
@@ -382,23 +395,34 @@ export default{
 .excercise-detail-content{
   display: grid;
   gap: 1px;
-  grid-template-columns: 20px 270px 0px;
+  grid-template-columns: 20px 270px 0;
   padding-left: 20px;
   font-size: 16px;
   padding-top: 5px;
 }
 
 .workouts-edit{
+  padding: 0 0 0 0;
   position: fixed;
-  border-radius: 3px;
+  border-radius: 4px;
   border-width: 2px;
   border-style: solid;
-  border-color: black;
-  width: 40%;
+  border-color: white;
+  width: 20%;
   height: 40%;
   background-size:100%;
-  background-color: #d9d9d9;
+  color: white;
+  background-color: black;
   align-self: center;
+  margin-left:40%;
+  margin-top:10%;
 }
+
+.list-exercises{
+  position: fixed;
+  align-items: center;
+  color: white;
+}
+
 
 </style>
