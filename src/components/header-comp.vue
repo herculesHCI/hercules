@@ -34,17 +34,9 @@
             params:{slug:myProfileLink.route}
           }">
             <v-btn icon color="#000000" x-large>
-              <v-avatar>
-                <v-img :src="userImage"></v-img>
-              </v-avatar>
-            </v-btn>
-          </router-link>
-          <router-link :to="{
-            name:settingLink.name,
-            params:{slug:settingLink.route}
-          }">
-            <v-btn icon color="#000000" x-large>
-              <v-icon>mdi-dots-vertical</v-icon>
+              <v-icon>
+                mdi-account-circle
+              </v-icon>
             </v-btn>
           </router-link>
         </v-row>
@@ -59,12 +51,11 @@ export default {
   name: "header-comp",
   data: () => ({
     links: [
-      {text: 'Discover', name: 'Home-Landing', route: '/home'},
-      {text: 'My Workouts', name: 'WorkoutsPage', route: '/WorkoutsPage'},
+      {text: 'Discover', name: 'Home-Landing', route: 'home'},
+      {text: 'My Workouts', name: 'WorkoutsPage', route: 'WorkoutsPage'},
+      {text: 'My Exercises', name: 'visualizeExercises', route: 'visualizeExercises'}
     ],
     myProfileLink: {name: 'My Profile', route: '/MyProfile'},
-    settingLink:{name:'Settings',route:'/Settings'},
-    userImage: "https://www.biografiacortade.com/wp-content/uploads/2018/09/socrates-imagen.jpg"
   }),
   methods:{
     toPath(linkpath){

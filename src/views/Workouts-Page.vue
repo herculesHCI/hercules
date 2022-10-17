@@ -1,6 +1,6 @@
 <template>
 
-  <div class="Workouts-page" id="Workouts-page">
+  <div class="Workouts-page">
     <div class="Workouts">
 
       <v-row class="header-container">
