@@ -11,6 +11,7 @@ import accessDenied from "@/views/accessDenied";
 import visualizeExcercises from "@/views/visualizeExcercises";
 import modifyExercise from "@/views/modifyExercise";
 import createNewExercise from "@/views/createNewExercise";
+import modifyMyProfile from "@/views/modifyMyProfile";
 //require('vue-router').default;
 Vue.use(VueRouter);
 
@@ -68,6 +69,11 @@ const routes = [
                 path: "createNewExercise",
                 name: "createNewExercise",
                 component: createNewExercise
+            },
+            {
+                path: "modifyMyProfile",
+                name: "modifyMyProfile",
+                component: modifyMyProfile
             }
 
         ]},

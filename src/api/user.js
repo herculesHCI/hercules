@@ -1,6 +1,6 @@
 import { Api } from "./api"
 
-export { UserApi, Credentials, createdCredentials }
+export { UserApi, Credentials, createdCredentials,modifyCredentials }
 
 class UserApi{
     static getUrl(slug){
@@ -27,6 +27,10 @@ class UserApi{
     static async get(){
         return Api.get(UserApi.getUrl('current'), true);
     }
+
+    static async put(credentials){
+        return Api.put(UserApi.getUrl('current'), true,credentials);
+    }
 }
 
 class Credentials {
@@ -41,6 +45,14 @@ class createdCredentials{
         this.username = username;
         this.password = password;
         this.email = email;
+        this.avatarUrl = avatarUrl;
+        this.metadata=metadata;
+    }
+}
+
+class modifyCredentials{
+    constructor(avatarUrl,metadata) {
+
         this.avatarUrl = avatarUrl;
         this.metadata=metadata;
     }
