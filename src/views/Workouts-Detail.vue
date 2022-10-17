@@ -126,13 +126,16 @@ export default{
 
     }
   },
-
+  props:{
+    routineId2 : Number
+  },
   async created(){
     await this.initialize();
 
   },
   methods: {
     async initialize(){
+      this.routineID = this.routineId2;
       let aux;
       this.routine = (await this.$getRoutine(this.routineID));
       aux = await this.$getCycle(this.routineID);

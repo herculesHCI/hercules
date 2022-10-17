@@ -11,7 +11,7 @@
             indeterminate/>
       </template>
 
-      <v-img max-height="250" :src="workout.metadata" alt="Image not fount :/"/>
+      <v-img max-height="250" :src="workout.metadata" alt="Image not found :/"/>
 
       <v-card-title style="padding-left: 20px">{{ workout.name }}
         <v-spacer/>
@@ -27,12 +27,14 @@
           </div>
         </v-row>
       </v-card-text>
-      <v-btn
-          class="blue darken-3  white--text"
-          style="margin: 20px"
-      >
-        See Workout
-      </v-btn>
+      <router-link to="/main/WorkoutsDetail" :routineId="workout.id">
+        <v-btn
+            class="blue darken-3  white--text"
+            style="margin: 20px"
+        >
+          See Workout
+        </v-btn>
+      </router-link>
     </v-card>
   </v-container>
 </template>
@@ -64,38 +66,4 @@ export default {
 
 <style scoped>
 
-.workout-element{
-  height: auto;
-  width: 1215px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 72px;
-  padding: 0.25rem 0.25rem;
-  background: white;
-  border-style: solid;
-  border-width: 3px;
-  border-color: black;
-  border-radius: 5px;
-  padding:0 0;
-}
-.workout-element-image{
-  object-fit: cover;
-  object-position: 50% 30%;
-  padding: 0 0;
-  margin: 0 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.workout-element-text{
-  text-align: left;
-  padding-top: 30px;
-  padding-left: 30px ;
-  padding-right: 0px;
-  font-size: 30px ;
-}
-.workout-element-icon{
-  display: grid;
-  grid-template-rows: auto;
-}
 </style>

@@ -40,9 +40,6 @@
           </div>
         </v-row>
       </v-container>
-
-
-
     </div>
   </div>
 </template>
