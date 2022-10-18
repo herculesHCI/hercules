@@ -35,6 +35,7 @@ export default {
   methods: {
     ...mapActions(useExerciseStore, {
       $delete: 'delete',
+      $getAll: 'getAll'
     }),
     sendToModify(item) {
       this.$router.push({name: 'modifyExercise', params: {item: item}})
@@ -44,11 +45,11 @@ export default {
     },
     async deleteItem(item){
       await this.$delete(item.id)
-      await this.$router.push('home')
+      this.$mount()
     }
 
     },
-    async created() {
+    async beforeMount() {
       const exerciseStore = useExerciseStore();
       this.items = await exerciseStore.getAll();
     }
