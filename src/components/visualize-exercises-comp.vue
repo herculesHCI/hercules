@@ -35,7 +35,6 @@ export default {
   methods: {
     ...mapActions(useExerciseStore, {
       $delete: 'delete',
-      $getAll: 'getAll'
     }),
     sendToModify(item) {
       this.$router.push({name: 'modifyExercise', params: {item: item}})
